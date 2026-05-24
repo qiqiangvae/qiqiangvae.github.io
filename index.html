@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>青甘大环线 v5 · 双标签行程卡</title>
+<title>青甘大环线 · 行程+准备攻略一体</title>
 <style>
   :root {
     --bg: #0f172a; --bg2: #1e293b; --bg3: #334155;
     --fg: #e2e8f0; --fg2: #94a3b8;
     --amber: #f59e0b; --em: #10b981; --blue: #3b82f6;
-    --red: #ef4444; --orange: #f97316; --cyan: #06b6d4; --purple: #a855f7;
+    --red: #ef4444; --orange: #f97316; --cyan: #06b6d4; --purple: #a855f7; --rose: #f43f5e;
     --border: #334155; --card: #1e293b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -17,18 +17,9 @@
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', sans-serif;
     background: var(--bg); color: var(--fg); line-height: 1.7;
   }
-  @media print {
-    body { background:#fff; color:#111; }
-    :root { --bg:#fff; --bg2:#f8fafc; --bg3:#e2e8f0; --fg:#111; --fg2:#475569; --card:#f8fafc; --border:#e2e8f0; }
-    .day-card { break-inside:avoid; }
-    .no-print { display:none !important; }
-    .tab-content { display:block !important; }
-    .tab-pane { display:block !important; }
-    .tab-pane.pitfall { display:none !important; }
-  }
 
   .hero {
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0d9488 70%, #f59e0b 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0d9488 70%, #7c3aed 100%);
     padding: 40px 24px 32px; text-align: center; position: relative; overflow: hidden;
   }
   .hero::before {
@@ -37,37 +28,43 @@
     opacity: 0.5;
   }
   .hero h1 { font-size: clamp(1.3rem,4vw,2.2rem); font-weight:800; position:relative; }
-  .hero h1 span { background:linear-gradient(135deg,#fbbf24,#f59e0b,#f97316); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+  .hero h1 span { background:linear-gradient(135deg,#fbbf24,#f59e0b,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
   .hero .sub { color:rgba(255,255,255,0.85); font-size:0.9rem; margin-top:6px; position:relative; }
-  .hero .stat-row { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-top:14px; position:relative; }
-  .hero .stat-row span { background:rgba(255,255,255,0.1); padding:4px 14px; border-radius:999px; font-size:0.8rem; border:1px solid rgba(255,255,255,0.12); }
+  .hero .stat-row { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:12px; position:relative; }
+  .hero .stat-row span { background:rgba(255,255,255,0.1); padding:4px 14px; border-radius:999px; font-size:0.78rem; border:1px solid rgba(255,255,255,0.12); }
   .hero .stat-row .big-num { color:var(--amber); font-weight:700; }
 
-  .container { max-width: 880px; margin: 0 auto; padding: 20px 16px; }
-  .no-print { text-align:right; }
-  .print-btn { display:inline-block; padding:8px 20px; background:var(--amber); color:#000; border:none; border-radius:8px; font-weight:600; cursor:pointer; margin:10px 0; font-size:0.85rem; }
+  .container { max-width: 880px; margin: 0 auto; padding: 16px; }
 
-  .day-card { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:16px; overflow:hidden; }
+  /* Top-level Module Tabs */
+  .module-tabs { display:flex; gap:0; margin-bottom:20px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:var(--bg2); }
+  .module-btn {
+    flex:1; padding:12px 16px; border:none; background:transparent; color:var(--fg2); font-size:0.9rem; font-weight:600; cursor:pointer; transition:0.2s; font-family:inherit;
+  }
+  .module-btn:hover { background:rgba(255,255,255,0.03); color:var(--fg); }
+  .module-btn.active { background:var(--card); color:var(--amber); }
+  .module-btn.active .sub-lbl { color:var(--fg2); }
+
+  .module-content { display:none; }
+  .module-content.active { display:block; }
+
+  /* Day-card level tabs (same as before) */
+  .tab-bar { display:flex; border-bottom:1px solid var(--border); background:var(--bg2); }
+  .tab-btn {
+    flex:1; padding:8px 12px; border:none; background:transparent; color:var(--fg2); font-size:0.78rem; font-weight:600; cursor:pointer; transition:0.2s; position:relative; font-family:inherit;
+  }
+  .tab-btn:hover { color:var(--fg); background:rgba(255,255,255,0.03); }
+  .tab-btn.active { color:var(--amber); background:var(--bg); }
+  .tab-btn.active::after { content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; background:var(--amber); border-radius:2px; }
+  .tab-content { display:block; }
+  .tab-pane { display:none; padding:12px 18px; }
+  .tab-pane.active { display:block; }
+
+  .day-card { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:14px; overflow:hidden; }
   .day-header { padding:12px 18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:4px; border-bottom:1px solid var(--border); }
   .day-header .title { font-size:0.95rem; font-weight:700; }
   .day-header .title .num { color:var(--amber); }
   .day-header .total { font-size:0.72rem; color:var(--cyan); }
-
-  /* Tabs */
-  .tab-bar { display:flex; border-bottom:1px solid var(--border); background:var(--bg2); }
-  .tab-btn {
-    flex:1; padding:8px 12px; border:none; background:transparent; color:var(--fg2); font-size:0.78rem; font-weight:600; cursor:pointer; transition:0.2s; position:relative;
-    font-family:inherit;
-  }
-  .tab-btn:hover { color:var(--fg); background:rgba(255,255,255,0.03); }
-  .tab-btn.active { color:var(--amber); background:var(--bg); }
-  .tab-btn.active::after {
-    content:''; position:absolute; bottom:0; left:20%; right:20%; height:2px; background:var(--amber); border-radius:2px;
-  }
-
-  .tab-content { display:block; }
-  .tab-pane { display:none; padding:12px 18px; }
-  .tab-pane.active { display:block; }
 
   .leg-table { width:100%; border-collapse:collapse; font-size:0.8rem; }
   .leg-table th { text-align:left; color:var(--fg2); font-weight:600; font-size:0.7rem; padding:5px 8px; border-bottom:1px solid var(--border); background:var(--bg2); }
@@ -92,12 +89,16 @@
   .summary-table .rest td { color:var(--blue); }
   .summary-table .total-row td { font-weight:700; border-top:2px solid var(--amber); color:var(--amber); }
 
+  .intensity-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+  .intensity-item { padding:4px 10px; border-radius:6px; font-size:0.72rem; }
+  .intensity-item.red { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
+  .intensity-item.amber { background:rgba(245,158,11,0.15); color:var(--amber); border:1px solid rgba(245,158,11,0.3); }
+  .intensity-item.green { background:rgba(16,185,129,0.15); color:var(--em); border:1px solid rgba(16,185,129,0.3); }
+  .intensity-item.blue { background:rgba(59,130,246,0.15); color:var(--blue); border:1px solid rgba(59,130,246,0.3); }
+
   /* Pitfall tab styling */
   .pitfall-list { list-style:none; }
-  .pitfall-list li { 
-    padding:8px 12px; margin-bottom:6px; border-radius:8px; font-size:0.8rem; line-height:1.5;
-    display:flex; gap:8px; align-items:flex-start;
-  }
+  .pitfall-list li { padding:8px 12px; margin-bottom:6px; border-radius:8px; font-size:0.8rem; line-height:1.5; display:flex; gap:8px; align-items:flex-start; }
   .pitfall-list li .icon { flex-shrink:0; font-size:1rem; margin-top:1px; }
   .pitfall-list li.danger { background:rgba(239,68,68,0.08); border-left:3px solid var(--red); }
   .pitfall-list li.warn { background:rgba(245,158,11,0.08); border-left:3px solid var(--amber); }
@@ -105,76 +106,138 @@
   .pitfall-list li.info { background:rgba(59,130,246,0.08); border-left:3px solid var(--blue); }
   .pitfall-list li .strong { font-weight:700; }
 
-  .footer { text-align:center; padding:24px 16px; color:var(--fg2); font-size:0.75rem; border-top:1px solid var(--border); margin-top:24px; }
+  /* ============ PREP MODULE STYLES ============ */
+  .section-card { background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:16px; overflow:hidden; }
+  .section-card .sc-header { padding:12px 18px; border-bottom:1px solid var(--border); font-weight:700; font-size:0.95rem; display:flex; align-items:center; gap:8px; }
+  .section-card .sc-body { padding:12px 18px; }
+  .prep-sec-h { font-size:1.15rem; font-weight:700; margin:24px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--amber); display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
 
-  .intensity-bar { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px; }
-  .intensity-item { padding:4px 10px; border-radius:6px; font-size:0.72rem; }
-  .intensity-item.red { background:rgba(239,68,68,0.15); color:var(--red); border:1px solid rgba(239,68,68,0.3); }
-  .intensity-item.amber { background:rgba(245,158,11,0.15); color:var(--amber); border:1px solid rgba(245,158,11,0.3); }
-  .intensity-item.green { background:rgba(16,185,129,0.15); color:var(--em); border:1px solid rgba(16,185,129,0.3); }
-  .intensity-item.blue { background:rgba(59,130,246,0.15); color:var(--blue); border:1px solid rgba(59,130,246,0.3); }
+  .item-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(165px,1fr)); gap:8px; }
+  .item-card { background:var(--bg2); border-radius:10px; padding:12px; }
+  .item-card .icn { font-size:1.2rem; }
+  .item-card .nm { font-weight:700; font-size:0.85rem; margin-top:4px; }
+  .item-card .why { color:var(--fg2); font-size:0.72rem; margin-top:2px; }
+
+  .prep-checklist { list-style:none; }
+  .prep-checklist > li { padding:10px 14px; margin-bottom:6px; border-radius:8px; font-size:0.85rem; display:flex; gap:10px; align-items:flex-start; }
+  .prep-checklist > li .icn { flex-shrink:0; font-size:1.1rem; margin-top:1px; }
+  .prep-checklist > li.danger { background:rgba(239,68,68,0.08); border-left:3px solid var(--red); }
+  .prep-checklist > li.warn { background:rgba(245,158,11,0.08); border-left:3px solid var(--amber); }
+  .prep-checklist > li .strong { font-weight:700; }
+
+  .outfit-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:8px; }
+  .outfit-card { background:var(--bg2); border-radius:10px; padding:12px; }
+  .outfit-card .loc { font-weight:700; color:var(--amber); font-size:0.88rem; }
+  .outfit-card .temps { margin-top:4px; font-size:0.78rem; }
+  .outfit-card .temps .d { color:var(--orange); font-weight:600; }
+  .outfit-card .temps .n { color:var(--cyan); font-weight:600; }
+  .outfit-card .otft { margin-top:6px; font-size:0.8rem; padding:6px 8px; background:rgba(255,255,255,0.03); border-radius:6px; }
+  .outfit-card .ptip { margin-top:4px; font-size:0.72rem; color:var(--fg2); }
+
+  .photo-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; }
+  .photo-card { background:var(--bg2); border-radius:10px; padding:12px; }
+  .photo-card .loc { font-weight:700; color:var(--purple); font-size:0.88rem; }
+  .photo-card .btime { font-size:0.72rem; color:var(--amber); margin-top:2px; }
+  .photo-card .tips { margin-top:6px; font-size:0.8rem; line-height:1.5; }
+  .photo-card .color-tag { display:inline-block; padding:1px 6px; border-radius:4px; font-size:0.68rem; font-weight:600; margin-top:4px; }
+  .photo-card .color-tag.red { background:rgba(244,63,94,0.2); color:var(--rose); }
+  .photo-card .color-tag.blue { background:rgba(59,130,246,0.2); color:var(--blue); }
+  .photo-card .color-tag.green { background:rgba(16,185,129,0.2); color:var(--em); }
+  .photo-card .color-tag.white { background:rgba(255,255,255,0.1); color:var(--fg); }
+
+  .app-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:8px; }
+  .app-card { background:var(--bg2); border-radius:10px; padding:10px 12px; display:flex; gap:10px; align-items:flex-start; }
+  .app-card .icn { font-size:1.3rem; flex-shrink:0; }
+  .app-card .nm { font-weight:700; font-size:0.83rem; }
+  .app-card .use { font-size:0.72rem; color:var(--fg2); margin-top:2px; }
+
+  .footer { text-align:center; padding:24px 16px; color:var(--fg2); font-size:0.75rem; border-top:1px solid var(--border); margin-top:24px; }
 </style>
 </head>
 <body>
 
 <div class="hero">
-  <h1><span>🛣️ 青甘大环线 · 双标签行程卡</span></h1>
-  <div class="sub">📋 行程 + ⚠️ 避坑 · 一键切换</div>
+  <h1><span>🏔️ 青甘大环线 · 自驾攻略</span></h1>
+  <div class="sub">行程规划 + 准备攻略 · 一页全含</div>
   <div class="stat-row">
-    <span>总里程 <span class="big-num">2,445km</span></span>
-    <span>纯驾驶 <span class="big-num">31h</span></span>
-    <span>8天7晚</span>
-    <span>6/13 15:30→6/20 20:20</span>
+    <span>🗓️ 6/13(五) 15:30 → 6/20(五) 20:20</span>
+    <span>🚗 <span class="big-num">2,772km</span> / ~38h</span>
+    <span>🏠 7晚</span>
+    <span>🆕 察尔汗盐湖</span>
   </div>
 </div>
 
 <div class="container">
 
-<div class="no-print">
-  <button class="print-btn" onclick="window.print()">🖨️ 打印 / PDF</button>
-</div>
-
-<div class="intensity-bar">
-  <span class="intensity-item red">🔴 高强度 D3·D6</span>
-  <span class="intensity-item amber">🟡 中强度 D2·D4·D8</span>
-  <span class="intensity-item green">🟢 低强度 D7</span>
-  <span class="intensity-item blue">⚪ 休整日 D1·D5</span>
+<!-- ===== MODULE TABS ===== -->
+<div class="module-tabs">
+  <button class="module-btn active" onclick="switchModule('itin')">
+    🗺️ 行程规划
+    <div style="font-size:0.65rem;color:var(--fg2);font-weight:400;margin-top:2px;">8天详细日程+路程+避坑</div>
+  </button>
+  <button class="module-btn" onclick="switchModule('prep')">
+    🎒 准备攻略
+    <div style="font-size:0.65rem;color:var(--fg2);font-weight:400;margin-top:2px;">物品·穿搭·拍摄·App</div>
+  </button>
+  <button class="module-btn" onclick="switchModule('map')">
+    🗺️ 行车路线图
+    <div style="font-size:0.65rem;color:var(--fg2);font-weight:400;margin-top:2px;">高德路线·全部标记</div>
+  </button>
 </div>
 
 <script>
+function switchModule(mod) {
+  document.querySelectorAll('.module-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.module-content').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.module-btn[onclick*='${mod}']`).classList.add('active');
+  document.getElementById(`mod-${mod}`).classList.add('active');
+}
 function switchTab(cardId, tab) {
-  document.querySelectorAll(`#${cardId} .tab-pane`).forEach(p => p.classList.remove('active'));
-  document.querySelectorAll(`#${cardId} .tab-btn`).forEach(b => b.classList.remove('active'));
-  document.querySelector(`#${cardId} .tab-pane.${tab}`).classList.add('active');
-  document.querySelector(`#${cardId} .tab-btn.${tab}`).classList.add('active');
+  const card = document.getElementById(cardId);
+  card.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelector(`.tab-pane.${tab}`).classList.add('active');
+  card.querySelector(`.tab-btn.${tab}`).classList.add('active');
 }
 function initTabs() {
   document.querySelectorAll('.tab-bar').forEach(bar => {
-    const firstBtn = bar.querySelector('.tab-btn');
     const card = bar.closest('.day-card');
+    const firstBtn = bar.querySelector('.tab-btn');
     const firstPane = card.querySelector('.tab-pane');
-    if (firstBtn && firstPane) { firstBtn.classList.add('active'); firstPane.classList.add('active'); }
+    if(firstBtn && firstPane) { firstBtn.classList.add('active'); firstPane.classList.add('active'); }
   });
 }
 document.addEventListener('DOMContentLoaded', initTabs);
 </script>
 
-<!-- ===== D1 ===== -->
-<div class="day-card" id="card1">
+<!-- ============================================================ -->
+<!-- MODULE 1: 行程规划 -->
+<!-- ============================================================ -->
+<div class="module-content active" id="mod-itin">
+
+<div class="intensity-bar">
+  <span class="intensity-item red">🔴 高强度 D2·D4·D7</span>
+  <span class="intensity-item amber">🟡 中强度 D3·D5</span>
+  <span class="intensity-item green">🟢 轻松 D8</span>
+  <span class="intensity-item blue">⚪ 休整日 D1·D6</span>
+</div>
+
+<!-- D1 -->
+<div class="day-card" id="c1">
   <div class="day-header">
-    <div class="title"><span class="num">Day 1</span> · 6/13五 · 抵达西宁</div>
-    <span class="total">🚗 30km / 30min</span>
+    <div class="title"><span class="num">Day 1</span> · 6/13五 · 抵达西宁 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住西宁市区</span></div>
+    <span class="total">🚗 8km / 26min ⚪ ✅高德验证</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card1','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card1','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c1','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c1','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
         <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>曹家堡机场 → 西宁市区</td><td>30km</td><td>30min</td><td>南绕城高速</td></tr>
-        <tr class="total-row"><td>合计</td><td>30km</td><td>30min</td><td>—</td></tr>
+        <tr><td>曹家堡机场 → 西宁市区</td><td>8km</td><td>26min</td><td>京藏高速, 海拔2,200m ✅高德验证</td></tr>
+        <tr class="total-row"><td>合计</td><td>8km</td><td>26min</td><td>—</td></tr>
       </table>
       <div class="total-bar blue"><span class="strong">⏰ 时间线：</span><span>15:30抵达→16:00提车→17:00进城+药店→17:30入住→18:30莫家街→21:00回酒店</span></div>
     </div>
@@ -182,138 +245,159 @@ document.addEventListener('DOMContentLoaded', initTabs);
       <ul class="pitfall-list">
         <li class="danger"><span class="icon">🔴</span><span><span class="strong">提车拍视频</span> — 四个角+底盘+油量表拍清楚，防还车纠纷</span></li>
         <li class="warn"><span class="icon">🟡</span><span><span class="strong">药店采购</span> — 葡萄糖口服液(¥5) + 布洛芬 + 氧气瓶(¥20)，景区卖¥50</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">不洗澡/少洗澡</span> — 海拔2,200m洗澡加速血液循环，增加高反风险</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">不喝酒、不吃太饱</span> — 防高反的基础原则</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">不洗澡/少洗·不喝酒·不吃太饱</span> — 防高反三原则</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D2 ===== -->
-<div class="day-card" id="card2">
+<!-- D2: 西宁→青海湖→茶卡→德令哈(宿) -->
+<div class="day-card" id="c2">
   <div class="day-header">
-    <div class="title"><span class="num">Day 2</span> · 6/14六 · 西宁→青海湖→茶卡</div>
-    <span class="total">🚗 250km / 3.5h</span>
+    <div class="title"><span class="num">Day 2</span> · 6/14六 · 西宁→青海湖→<strong>茶卡盐湖</strong>→德令哈 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住德令哈</span></div>
+    <span class="total">🚗 519km / 8h14min 🔴</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card2','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card2','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c2','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c2','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>西宁→湟源</td><td>50km</td><td>40min</td><td>西湟一级公路</td></tr>
-        <tr><td>湟源→倒淌河</td><td>40km</td><td>30min</td><td>一级→G109</td></tr>
-        <tr><td>倒淌河→青海湖·黑马河</td><td>60km</td><td>50min</td><td>G109·环湖公路</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 游玩青海湖（2h）+ 午餐（1h）</td></tr>
-        <tr><td>黑马河→橡皮山(3,817m)</td><td>20km</td><td>30min</td><td>G109·盘山↗️</td></tr>
-        <tr><td>橡皮山→茶卡镇</td><td>80km</td><td>1h</td><td>G109→共茶高速</td></tr>
-        <tr class="total-row"><td>合计</td><td>250km</td><td>3.5h</td><td>+游玩2h+午餐1h=总~7h</td></tr>
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>西宁→<strong>日月山</strong> 📍途径</td><td>92km</td><td>1h14min</td><td>西湟一级+G109 · 垭口3,520m</td></tr>
+        <tr><td>日月山→<strong>青海湖</strong> 🎯游玩2h</td><td>128km</td><td>1h42min</td><td>G109·环湖公路·油菜花+牦牛</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 青海湖·环湖西路免费入口（2h）+ 午餐（1h）</td></tr>
+        <tr><td>青海湖→<strong>橡皮山</strong>（3,817m）📍途径</td><td>27km</td><td>1h01min</td><td>盘山↗️最高点·G109翻山</td></tr>
+        <tr><td>橡皮山→<strong>茶卡盐湖</strong> 🪞🎯游玩2h</td><td>61km</td><td>1h35min</td><td>G109·天空之镜·小火车</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 茶卡盐湖游玩（2h）</td></tr>
+        <tr><td>茶卡→<strong>德令哈</strong> 🏨入住</td><td>211km</td><td>2h42min</td><td>茶德高速·戈壁公路</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>519km</strong></td><td><strong>8h14min</strong></td><td>🔴 全程最长驾驶日 ⚠️早出发</td></tr>
       </table>
-      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>07:30出发→10:00青海湖→12:00午餐→13:00翻橡皮山→15:30到茶卡→15:30-18:30茶卡→19:00入住</span></div>
+      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span><strong>06:30出发</strong>→08:30日月山→10:30青海湖→12:30午餐→14:00茶卡→16:30撤→<strong>19:30到德令哈</strong>→20:00入住</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">茶卡天气分支</span> — ☀️晴天去·☁️阴雨天直接跳过！阴天的茶卡=灰色水泥地，¥110白花。当天早上查茶卡镇天气预报</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">不去二郎剑(¥90)</span> — 去环湖西路（黑马河往北5km）政府设立的免费湖边入口</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">翻橡皮山(3,817m)</span> — 连续上坡下坡，注意高反：动作慢、多喝葡萄糖水</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">茶卡盐湖</span> — 租鞋套¥10或穿拖鞋，盐粒刺脚。带红/鲜艳裙子拍照。15:00-18:00光线最好</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">519km+8h驾驶！全程最长</span> — 必须6:30前出发，茶卡控制在2h内</span></li>
+        <li class="info"><span class="icon">🔵</span><span><span class="strong">不去二郎剑(¥90)</span> — 去环湖西路免费入口（黑马河往北5km）</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">翻橡皮山(3,817m)</span> — 注意高反：动作慢、喝葡萄糖水</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">住德令哈</span> — 为D3穿越柴达木做准备，德令哈住宿便宜</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D3 ===== -->
-<div class="day-card" id="card3" style="border-color:var(--red);">
-  <div class="day-header" style="border-color:var(--red);">
-    <div class="title"><span class="num">Day 3</span> · 6/15日 · 茶卡→U型公路→水上雅丹→翡翠湖</div>
-    <span class="total" style="color:var(--red);">🚗 690km / 7h50min 🔴</span>
+<!-- D3: 德令哈→柴达木盆地→察尔汗盐湖→格尔木(宿) -->
+<div class="day-card" id="c3" style="border-color:var(--amber);">
+  <div class="day-header" style="border-color:var(--amber);">
+    <div class="title"><span class="num">Day 3</span> · 6/15日 · 德令哈→柴达木盆地🏜️→<strong>察尔汗盐湖</strong>→格尔木 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住格尔木</span></div>
+    <span class="total" style="color:var(--amber);">🚗 340km / 4h20min 🟢轻松</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card3','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card3','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c3','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c3','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>茶卡镇→德令哈</td><td>200km</td><td>2h20min</td><td>茶德高速·平坦</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 海子诗歌馆（30min）+ 午餐（30min）+ ⛽满油</td></tr>
-        <tr><td>德令哈→小柴旦湖</td><td>140km</td><td>1h30min</td><td>德小高速</td></tr>
-        <tr><td>小柴旦湖→<strong>315U型公路</strong></td><td>30km</td><td>20min</td><td>315国道</td></tr>
-        <tr class="section-row"><td colspan="4">▸ U型公路拍照（20min）</td></tr>
-        <tr><td>U型公路→<strong>水上雅丹</strong></td><td>120km</td><td>1h20min</td><td>315·荒漠🏜️</td></tr>
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>德令哈→<strong>穿越柴达木盆地</strong> 🏜️戈壁公路大片</td><td>277km</td><td>3h08min</td><td>G6京藏高速·盆地风光</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 柴达木盆地沿途荒漠无人区风光（可停车拍照）</td></tr>
+        <tr><td>盆地→<strong>察尔汗盐湖·万丈盐桥</strong> 🎯游玩2h</td><td>63km</td><td>1h12min</td><td>柳格高速 ✅高德验证</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 游玩察尔汗盐湖（2h）🆓/¥50 · 亚洲最大盐湖</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>340km</strong></td><td><strong>4h20min</strong></td><td>🟢 最轻松一天！尽情玩</td></tr>
+      </table>
+      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>08:30出发→11:30柴达木盆地拍照→<strong>13:00-15:00察尔汗盐湖</strong>→16:00到格尔木→<strong>16:30入住</strong>→格尔木烤肉晚餐🍖</span></div>
+    </div>
+    <div class="tab-pane pitfall">
+      <ul class="pitfall-list">
+        <li class="info"><span class="icon">🔵</span><span><span class="strong">察尔汗盐湖</span> — 世界第二大盐湖，面积是茶卡的56倍！"万丈盐桥"32km公路修在盐湖上</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">柴达木盆地公路大片</span> — 荒漠+戈壁+远山，出片圣地</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">住格尔木</span> — 住宿条件好，比大柴旦便宜。格尔木烤肉非常有名</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">G6大车多</span> — 德令哈→格尔木段大货车较多，注意安全</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- D4: 格尔木→U型公路→水上雅丹→大柴旦(宿) 不含翡翠湖！ -->
+<div class="day-card" id="c4" style="border-color:var(--amber);">
+  <div class="day-header" style="border-color:var(--amber);">
+    <div class="title"><span class="num">Day 4</span> · 6/16一 · 格尔木→U型公路→<strong>水上雅丹</strong>→大柴旦 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住大柴旦</span></div>
+    <span class="total" style="color:var(--amber);">🚗 526km / 7h12min 🔴</span>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn itin" onclick="switchTab('c4','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c4','pitfall')">⚠️ 注意</button>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane itin">
+      <table class="leg-table">
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>格尔木→<strong>315U型公路</strong> 📍拍照20min</td><td>188km</td><td>2h42min</td><td>G3011+G315·戈壁公路</td></tr>
+        <tr class="section-row"><td colspan="4">▸ U型公路拍照（20min）⚠️路边拍！别站路中间</td></tr>
+        <tr><td>U型公路→<strong>水上雅丹</strong> 🎯游玩2.5h</td><td>121km</td><td>1h39min</td><td>315国道西行·荒漠🏜️</td></tr>
         <tr class="section-row"><td colspan="4">▸ 游玩水上雅丹（2.5h）¥120</td></tr>
-        <tr><td>水上雅丹→大柴旦镇</td><td>200km</td><td>2h20min</td><td>原路返回</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 18:30前到→翡翠湖（距镇5km）日落黄金光18:30-20:00</td></tr>
-        <tr class="total-row"><td>合计</td><td><strong>690km</strong></td><td><strong>7h50min</strong></td><td>+游玩4h+午餐=总~13h</td></tr>
+        <tr><td>水上雅丹→<strong>大柴旦</strong> 🏨入住</td><td>217km</td><td>2h51min</td><td>315国道东行·原路返回</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>526km</strong></td><td><strong>7h12min</strong></td><td>🔴 原路往返水上雅丹</td></tr>
       </table>
-      <div class="total-bar red"><span class="strong">⏰ 时间线：</span><span>07:00出发→10:00德令哈→12:00→12:20U型公路→14:00水上雅丹→16:30撤→18:30翡翠湖→20:00入住</span></div>
+      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>07:30出发→09:30U型公路→12:00水上雅丹→14:30撤→17:30大柴旦入住</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">690km是最长的一天</span> — 必须7:00出发！前一天加满油、备好水和零食</span></li>
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">315U型公路禁止路中间拍照！</span> 大货车多且车速快，每年都有伤亡事故。在路边拍效果一样好</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">水上雅丹蚊子超级多</span> — 带驱蚊水，长袖长裤</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">加油站间距极大</span> — 德令哈出城务必满油。到大柴旦前只有鱼卡服务区（可能关闭）</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">翡翠湖最佳时间</span> — 日落前1h（18:30-20:00），光线最柔和。有无人机必飞</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">315国道限速多</span> — 区间测速，注意不要超速</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">U型公路禁止路中间拍照！</span>大货车多车速快</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">水上雅丹蚊子超级多</span> — 带驱蚊水</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">翡翠湖明天再去</span> — 按旅行社路线，翡翠湖安排在D5早上，光线好</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D4 ===== -->
-<div class="day-card" id="card4">
+<!-- D5: 大柴旦→翡翠湖→当金山→黑独山→石油小镇→敦煌(宿) -->
+<div class="day-card" id="c5">
   <div class="day-header">
-    <div class="title"><span class="num">Day 4</span> · 6/16一 · 大柴旦→黑独山→石油小镇→敦煌</div>
-    <span class="total">🚗 335km / 4h30min</span>
+    <div class="title"><span class="num">Day 5</span> · 6/17二 · 🎯翡翠湖→当金山→黑独山→石油小镇→敦煌🐫 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住敦煌（连住2晚）</span></div>
+    <span class="total">🚗 419km / 5h56min 🟡</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card4','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card4','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c5','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c5','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>大柴旦→翡翠湖（补拍）</td><td>5km</td><td>10min</td><td>砂石路</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 翡翠湖补拍（1h，D3没去的话）</td></tr>
-        <tr><td>大柴旦⛽满油</td><td>—</td><td>10min</td><td>镇上加油站</td></tr>
-        <tr><td>大柴旦→当金山脚</td><td>160km</td><td>1h50min</td><td>柳格高速</td></tr>
-        <tr class="warn"><td>⚠️当金山爬坡→山口(3,600m)</td><td>30km</td><td>40min</td><td>上坡↗️</td></tr>
-        <tr class="warn"><td>⚠️当金山下坡→阿克塞</td><td>40km</td><td>40min</td><td><strong>30km下坡·发动机制动！</strong></td></tr>
-        <tr><td>阿克塞→<strong>黑独山</strong>（🆓）</td><td>5km</td><td>10min</td><td>路边即到</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 黑独山拍照（20min）</td></tr>
-        <tr><td>黑独山→<strong>石油小镇</strong>（¥30）</td><td>10km</td><td>10min</td><td>路边即到</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 石油小镇游玩（40min）🎬</td></tr>
-        <tr><td>石油小镇→敦煌市区</td><td>80km</td><td>1h</td><td>G215</td></tr>
-        <tr class="total-row"><td>合计</td><td><strong>335km</strong></td><td><strong>4h30min</strong></td><td>+游玩2h=总~8h</td></tr>
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>大柴旦→<strong>翡翠湖</strong> 🎯游玩1.5h（晨光）</td><td>12km</td><td>14min</td><td>翡翠色盐池·上午光线好</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 翡翠湖（1.5h）🆓 湖水因矿物质呈翡翠绿/蒂芙尼蓝</td></tr>
+        <tr><td>翡翠湖→<strong>当金山口</strong> 📍途径（3,600m垭口）</td><td>224km</td><td>2h32min</td><td>柳格高速→国道</td></tr>
+        <tr class="warn"><td>⚠️当金山下坡→阿克塞（30km长下坡！）</td><td>—</td><td>—</td><td>发动机制动！S挡/L挡</td></tr>
+        <tr><td>当金山→<strong>黑独山</strong> 📍拍照20min</td><td>50km</td><td>55min</td><td>国道+戈壁·水墨画山体</td></tr>
+        <tr><td>黑独山→<strong>石油小镇</strong> 🎯游玩40min</td><td>27km</td><td>30min</td><td>《九层妖塔》取景地🎬</td></tr>
+        <tr><td>石油小镇→敦煌市区</td><td>106km</td><td>1h45min</td><td>G215</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 入住休整→<strong>17:00鸣沙山看日落21:06</strong>🌅</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>419km</strong></td><td><strong>5h56min</strong></td><td>🟡 翡翠湖+敦煌日落</td></tr>
       </table>
-      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>07:30翡翠湖→08:30出发→11:00黑独山→11:30石油小镇→12:30→敦煌→14:00入住→17:00鸣沙山→21:30敦煌日落</span></div>
+      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>07:30出发→07:45翡翠湖→09:15出发→12:00当金山→14:00黑独山→15:00石油小镇→17:00敦煌入住→18:00鸣沙山→21:06日落🌅</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">当金山30km长下坡！</span> 海拔3,600m→1,200m，自动挡切手动模式降档/S挡/L挡，用发动机制动。不要长时间踩刹车，出发前检查刹车片</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">敦煌日落21:06 🔆</span> 比东部晚2小时！鸣沙山17:00-21:30，足够看完整日落</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">防沙装备</span> — 鸣沙山租防沙鞋套¥15，手机相机带密封袋，细沙进缝隙难清理</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">黑独山</span> — 免费，纯黑色山体如水墨画。停车在路边步行进去</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">石油小镇</span> — ¥30，《九层妖塔》拍摄地，有倒插公交车等电影场景</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">当金山30km长下坡！</span>自动挡切手动降档/S挡/L挡，用发动机制动</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">敦煌日落21:06 🔆</span> 鸣沙山17:00-21:30</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">翡翠湖早上去</span> — 上午光线好游客少，按旅行社路线D5第一站</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D5 ===== -->
-<div class="day-card" id="card5">
+<!-- D6 敦煌全天·莫高窟 -->
+<div class="day-card" id="c6">
   <div class="day-header">
-    <div class="title"><span class="num">Day 5</span> · 6/17二 · 敦煌全天·莫高窟+自由</div>
+    <div class="title"><span class="num">Day 6</span> · 6/18三 · 敦煌全天·莫高窟+自由 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住敦煌（连住第2晚）</span></div>
     <span class="total" style="color:var(--blue);">🚗 40km / 1h ⚪</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card5','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card5','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c6','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c6','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
@@ -322,163 +406,447 @@ document.addEventListener('DOMContentLoaded', initTabs);
         <tr><td>酒店→莫高窟</td><td>12km</td><td>15min</td><td>市区</td></tr>
         <tr><td>莫高窟→午餐</td><td>12km</td><td>15min</td><td>回市区</td></tr>
         <tr><td>午餐→酒店午休</td><td>3km</td><td>5min</td><td>市区</td></tr>
-        <tr><td>酒店→鸣沙山</td><td>5km</td><td>10min</td><td>市区</td></tr>
-        <tr><td>鸣沙山→夜市</td><td>5km</td><td>10min</td><td>市区</td></tr>
-        <tr><td>夜市→酒店</td><td>3km</td><td>5min</td><td>市区</td></tr>
-        <tr class="total-row"><td>合计</td><td>40km</td><td>1h</td><td>敦煌市区短途</td></tr>
+        <tr><td>酒店→自由活动</td><td>5km</td><td>10min</td><td>市区</td></tr>
+        <tr class="total-row"><td>合计</td><td>40km</td><td>1h</td><td>敦煌连住两晚</td></tr>
       </table>
-      <div class="total-bar blue"><span class="strong">⏰ 时间线：</span><span>09:00莫高窟→12:30午餐→14:00-17:00休整→17:00-21:00敦煌古城/自由→22:00夜市</span></div>
+      <div class="total-bar blue"><span class="strong">⏰ 时间线：</span><span>09:00莫高窟→12:30午餐→14:00-17:00休整自由（敦煌古城/博物馆/党河）→22:00沙洲夜市</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">莫高窟A票须提前预约！</span> 微信"莫高窟参观预约网"抢票，A票¥238（8窟+电影+讲解）</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">敦煌连住两晚</span> — 今天不用退房，行李不动，轻松</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">午餐推荐</span> — 顺张黄面馆/达记驴肉黄面，本地老字号</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">午休时间可以逛</span> — 敦煌博物馆（免费，文物精美），或回酒店补觉</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">莫高窟A票须提前预约！</span>微信"莫高窟参观预约网" ¥238（8窟+电影）</span></li>
+        <li class="info"><span class="icon">🔵</span><span><span class="strong">敦煌连住两晚</span> — 今天不用退房，行李不动</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D6 ===== -->
-<div class="day-card" id="card6" style="border-color:var(--red);">
+<!-- D7 敦煌→大地之子→嘉峪关→七彩丹霞（原D6） -->
+<div class="day-card" id="c7" style="border-color:var(--red);">
   <div class="day-header" style="border-color:var(--red);">
-    <div class="title"><span class="num">Day 6</span> · 6/18三 · 敦煌→大地之子→嘉峪关→七彩丹霞</div>
-    <span class="total" style="color:var(--red);">🚗 625km / 7h 🔴</span>
+    <div class="title"><span class="num">Day 7</span> · 6/19四 · 敦煌→大地之子→嘉峪关→<strong>七彩丹霞</strong>🌅 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🏨 住张掖</span></div>
+    <span class="total" style="color:var(--red);">🚗 603km / 6h58min 🔴</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card6','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card6','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c7','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c7','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>敦煌→<strong>大地之子</strong></td><td>110km</td><td>1h20min</td><td>G215→连霍高速</td></tr>
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>敦煌→<strong>大地之子+无界</strong> 📍途径拍照20min</td><td>118km</td><td>1h27min</td><td>G215+G30 ✅高德验证</td></tr>
         <tr class="section-row"><td colspan="4">▸ 大地之子拍照（20min）🆓</td></tr>
-        <tr><td>大地之子→嘉峪关关城</td><td>250km</td><td>2h30min</td><td>连霍高速·好</td></tr>
+        <tr><td>大地之子→<strong>嘉峪关关城</strong> 🎯游玩1.5h</td><td>267km</td><td>2h51min</td><td>连霍高速 ✅高德验证</td></tr>
         <tr class="section-row"><td colspan="4">▸ 游玩嘉峪关（1.5h）+ 午餐（1h）</td></tr>
-        <tr><td>嘉峪关→张掖西出口</td><td>230km</td><td>2h20min</td><td>连霍高速</td></tr>
-        <tr><td>张掖西→七彩丹霞景区</td><td>35km</td><td>30min</td><td>张肃公路</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 16:30入园→4号台等日落20:39（游玩4h）</td></tr>
-        <tr class="total-row"><td>合计</td><td><strong>625km</strong></td><td><strong>7h</strong></td><td>+游玩6h+午餐=总~14h</td></tr>
+        <tr><td>嘉峪关→<strong>张掖七彩丹霞</strong> 🎯游玩4h等日落</td><td>218km</td><td>2h43min</td><td>连霍高速 ✅高德验证</td></tr>
+        <tr class="section-row"><td colspan="4">▸ <strong>16:30后入园</strong>→4号台等日落20:39（4h）</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>603km</strong></td><td><strong>7h01min</strong></td><td>🔴 全程唯一高强度日</td></tr>
       </table>
-      <div class="total-bar red"><span class="strong">⏰ 时间线：</span><span>07:00出发→08:00大地之子→10:30嘉峪关→13:00→16:00张掖→16:30丹霞→20:39日落→21:00入住</span></div>
+      <div class="total-bar red"><span class="strong">⏰ 时间线：</span><span>07:00→08:28大地之子→11:21嘉峪关→13:51→16:40到张掖→<strong>16:40入园丹霞</strong>→20:39日落→21:00入住</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">625km+7h驾驶=全程第二长</span> — 必须7点出发！不能拖</span></li>
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">七彩丹霞一次性门票！</span> 出园作废不能重进。<strong>16:30后入园</strong>，到早了先去大佛寺(¥40)消磨时间</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">嘉峪关只看关城</span> — 1.5h足够，悬壁长城和第一墩有时间再去</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">丹霞攻略</span> — 4号观景台（七彩虹霞台）是日落最佳机位，日落前1-2h到。雨后天晴色彩最艳</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">大地之子</span> — 免费，就在路边，巨型婴儿躺卧雕塑，停车20min</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">603km+7h驾驶！全程唯一高强度日，必须7点出发</span></span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">七彩丹霞一次性门票！</span>出园作废。<strong>16:30后入园</strong>，到早了去大佛寺</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">丹霞攻略</span> — 4号台日落最佳，日落前1-2h到。雨后天晴最艳</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D7 ===== -->
-<div class="day-card" id="card7" style="border-color:var(--em);">
+<!-- D8: 张掖→扁都口→祁连草原→门源→机场 -->
+<div class="day-card" id="c8" style="border-color:var(--em);">
   <div class="day-header" style="border-color:var(--em);">
-    <div class="title"><span class="num">Day 7</span> · 6/19四 · 张掖→227国道→祁连卓尔山</div>
-    <span class="total" style="color:var(--em);">🚗 200km / 3h 🟢</span>
+    <div class="title"><span class="num">Day 8</span> · 6/20五 · 张掖→扁都口→🌿祁连草原→门源→✈️20:20 <span style="font-size:0.75rem;color:var(--purple);font-weight:400;">🛫 飞走</span></div>
+    <span class="total" style="color:var(--em);">🚗 357km / 4h50min 🟢轻松</span>
   </div>
   <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card7','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card7','pitfall')">⚠️ 注意</button>
+    <button class="tab-btn itin" onclick="switchTab('c8','itin')">📋 行程</button>
+    <button class="tab-btn pitfall" onclick="switchTab('c8','pitfall')">⚠️ 注意</button>
   </div>
   <div class="tab-content">
     <div class="tab-pane itin">
       <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>张掖市区→大佛寺</td><td>3km</td><td>5min</td><td>市区</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 大佛寺（40min）¥40</td></tr>
-        <tr><td>张掖→民乐县</td><td>70km</td><td>1h</td><td>G227 🏆最美公路</td></tr>
-        <tr><td>民乐→<strong>扁都口</strong></td><td>30km</td><td>30min</td><td>⚠️弯多·落石</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 扁都口拍照（15min）</td></tr>
-        <tr><td>扁都口→峨堡镇</td><td>40km</td><td>40min</td><td>G227盘山路</td></tr>
-        <tr><td>峨堡→阿柔大寺（可选）</td><td>20km</td><td>20min</td><td>🆓免费</td></tr>
-        <tr><td>阿柔→祁连县城</td><td>30km</td><td>30min</td><td>G227</td></tr>
-        <tr class="section-row"><td colspan="4">▸ ⛽加满油 + 午餐炕锅羊肉（1h）</td></tr>
-        <tr><td>祁连→卓尔山</td><td>5km</td><td>10min</td><td>上山路</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 游玩卓尔山（3h）¥80</td></tr>
-        <tr><td>卓尔山→祁连酒店</td><td>5km</td><td>10min</td><td>—</td></tr>
-        <tr class="total-row"><td>合计</td><td><strong>200km</strong></td><td><strong>3h</strong></td><td>🟢 全程最轻松</td></tr>
+        <tr><th>路段</th><th>距离</th><th>时间</th><th>风景/路况</th></tr>
+        <tr><td>张掖→<strong>扁都口</strong> 📍途径拍照</td><td>73km</td><td>1h00min</td><td>G30+G227·祁连山北麓</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 扁都口油菜花+雪山远景（6月油菜花初开）</td></tr>
+        <tr><td>扁都口→<strong>祁连大草原</strong> 🌿🎯游玩1h</td><td>63km</td><td>1h15min</td><td>G227·峨堡草原·牧场体验</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 祁连草原牧场体验（1h）骑马/拍照/草原漫步</td></tr>
+        <tr><td>祁连草原→<strong>门源油菜花海</strong> 🌸🎯游玩1h</td><td>100km</td><td>1h05min</td><td>G227 ✅高德验证</td></tr>
+        <tr class="section-row"><td colspan="4">▸ 门源花海（1h）6月中旬油菜花初开·百里金黄</td></tr>
+        <tr><td>门源→<strong>西宁机场</strong> 🛫（机场外加油还车）</td><td>121km</td><td>1h30min</td><td>G227+G6</td></tr>
+        <tr class="total-row"><td>合计</td><td><strong>357km</strong></td><td><strong>4h50min</strong></td><td>🟢 含祁连草原，轻松赶飞机</td></tr>
       </table>
-      <div class="total-bar green"><span class="strong">⏰ 时间线：</span><span>07:30大佛寺→08:30出发→11:30祁连午餐→13:00-16:00卓尔山→17:00入住→18:00草原日落20:38</span></div>
+      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>07:30出发→08:30扁都口→09:45祁连草原→11:00→12:05门源→13:05游玩→14:30→16:00到机场→加满油还车→20:20🛫</span></div>
     </div>
     <div class="tab-pane pitfall">
       <ul class="pitfall-list">
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">227国道扁都口段</span> — 弯多路窄，注意对向大货车和落石。建议早出发避开货车流</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">祁连海拔3,500m</span> — 比西宁还高，今晚注意高反。酒店选有供氧的</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">227国道</span> — 中国最美公路之一，雪山+草原+峡谷同框，沿途多停车拍照</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">祁连加满油</span> — 明早直接走不绕路。祁连加油站较少，出城前加好</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">晚餐推荐</span> — 祁连县城炕锅羊肉、牦牛火锅，地道的西北味</span></li>
+        <li class="danger"><span class="icon">🔴</span><span><span class="strong">外面加满油再还车！</span>外面¥7.5/L vs租车¥9-10/L，留小票</span></li>
+        <li class="warn"><span class="icon">🟡</span><span><span class="strong">还车对照提车视频</span> — 逐项检查防额外扣款</span></li>
+        <li class="tip"><span class="icon">🟢</span><span><span class="strong">祁连草原6月</span> — 草开始绿了，6月中旬温度10-20°C，适合牧场体验</span></li>
       </ul>
     </div>
   </div>
 </div>
 
-<!-- ===== D8 ===== -->
-<div class="day-card" id="card8">
-  <div class="day-header">
-    <div class="title"><span class="num">Day 8</span> · 6/20五 · 祁连→门源→西宁机场🛫20:20</div>
-    <span class="total">🚗 275km / 4h</span>
-  </div>
-  <div class="tab-bar">
-    <button class="tab-btn itin" onclick="switchTab('card8','itin')">📋 行程</button>
-    <button class="tab-btn pitfall" onclick="switchTab('card8','pitfall')">⚠️ 注意</button>
-  </div>
-  <div class="tab-content">
-    <div class="tab-pane itin">
-      <table class="leg-table">
-        <tr><th>路段</th><th>距离</th><th>时间</th><th>路况</th></tr>
-        <tr><td>祁连→岗什卡雪峰观景台</td><td>85km</td><td>1h25min</td><td>G227</td></tr>
-        <tr><td>岗什卡→达坂山观景台</td><td>20km</td><td>25min</td><td>G227↗️</td></tr>
-        <tr><td>达坂山→<strong>门源观花台</strong></td><td>20km</td><td>25min</td><td>下坡↘️</td></tr>
-        <tr class="section-row"><td colspan="4">▸ 游玩门源（1h）¥60</td></tr>
-        <tr><td>门源→大通县</td><td>80km</td><td>1h</td><td>G227→宁大高速</td></tr>
-        <tr><td>大通→西宁市区</td><td>35km</td><td>30min</td><td>宁大高速</td></tr>
-        <tr class="section-row"><td colspan="4">▸ ⛽外面加满油 + 午餐（1h）</td></tr>
-        <tr><td>加油站→曹家堡机场</td><td>35km</td><td>30min</td><td>南绕城高速</td></tr>
-        <tr class="total-row"><td>合计</td><td><strong>275km</strong></td><td><strong>4h</strong></td><td>边走边玩总~7h</td></tr>
-      </table>
-      <div class="total-bar amber"><span class="strong">⏰ 时间线：</span><span>09:00出发→11:00门源→12:00午餐→13:30→西宁→15:00加满油→15:30机场→16:00-20:00候机→20:20🛫</span></div>
-    </div>
-    <div class="tab-pane pitfall">
-      <ul class="pitfall-list">
-        <li class="danger"><span class="icon">🔴</span><span><span class="strong">外面加满油再还车！</span> 外面¥7.5/L，租车公司¥9-10/L，差价¥50+。留好加油站小票</span></li>
-        <li class="warn"><span class="icon">🟡</span><span><span class="strong">还车对照提车视频</span> — 逐项检查，防额外扣款</span></li>
-        <li class="info"><span class="icon">🔵</span><span><span class="strong">门源油菜花</span> — 6月中旬早花开放+青稞绿浪，配合雪山背景依然很美。盛花在7-8月</span></li>
-        <li class="tip"><span class="icon">🟢</span><span><span class="strong">时间充裕</span> — 09:00出发16:00到机场，完全不赶。可以悠哉吃最后一顿手抓羊肉</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- ===== SUMMARY ===== -->
+<!-- Summary -->
 <div class="day-card">
-  <div class="day-header"><div class="title">📊 全程总汇总</div><span class="total">🚗 2,445km / 31h</span></div>
+  <div class="day-header"><div class="title">📊 全程总汇总</div><span class="total">🚗 2,772km / 37h57min</span></div>
   <div class="tab-content" style="padding:12px 18px;">
     <table class="summary-table">
       <tr><th>天</th><th>日期</th><th>里程</th><th>驾驶</th><th>总耗时</th><th>强度</th><th>主题</th></tr>
-      <tr class="rest"><td>D1</td><td>6/13五</td><td>30km</td><td>0.5h</td><td>2h</td><td>⚪</td><td>抵达西宁</td></tr>
-      <tr class="mid"><td>D2</td><td>6/14六</td><td>250km</td><td>3.5h</td><td>7h</td><td>🟡</td><td>青海湖·茶卡</td></tr>
-      <tr class="high"><td>D3</td><td>6/15日</td><td>690km</td><td>7h50min</td><td>13h</td><td>🔴</td><td>水上雅丹</td></tr>
-      <tr class="mid"><td>D4</td><td>6/16一</td><td>335km</td><td>4.5h</td><td>8h</td><td>🟡</td><td>黑独山·敦煌</td></tr>
-      <tr class="rest"><td>D5</td><td>6/17二</td><td>40km</td><td>1h</td><td>自由</td><td>⚪</td><td>莫高窟休整</td></tr>
-      <tr class="high"><td>D6</td><td>6/18三</td><td>625km</td><td>7h</td><td>14h</td><td>🔴</td><td>嘉峪关·丹霞</td></tr>
-      <tr class="low"><td>D7</td><td>6/19四</td><td>200km</td><td>3h</td><td>8h</td><td>🟢</td><td>227国道·祁连</td></tr>
-      <tr class="mid"><td>D8</td><td>6/20五</td><td>275km</td><td>4h</td><td>7h</td><td>🟡</td><td>门源→机场</td></tr>
-      <tr class="total-row"><td>合计</td><td></td><td><strong>2,445km</strong></td><td><strong>31h</strong></td><td><strong>~60h</strong></td><td></td><td></td></tr>
+      <tr class="rest"><td>D1</td><td>6/13五</td><td>8km</td><td>27min</td><td>2h</td><td>⚪</td><td>抵达西宁</td></tr>
+      <tr class="high"><td>D2</td><td>6/14六</td><td><strong>519km</strong></td><td><strong>8h14m</strong></td><td>14h</td><td>🔴</td><td>青海湖·茶卡→德令哈</td></tr>
+      <tr class="mid"><td>D3</td><td>6/15日</td><td>340km</td><td>4h20m</td><td>8h</td><td>🟢</td><td>柴达木·察尔汗盐湖</td></tr>
+      <tr class="high"><td>D4</td><td>6/16一</td><td>526km</td><td>7h12m</td><td>10h</td><td>🔴</td><td>水上雅丹</td></tr>
+      <tr class="mid"><td>D5</td><td>6/17二</td><td>419km</td><td>5h56m</td><td>9h</td><td>🟡</td><td>翡翠湖→敦煌🐫</td></tr>
+      <tr class="rest"><td>D6</td><td>6/18三</td><td>40km</td><td>1h</td><td>自由</td><td>⚪</td><td>莫高窟休整</td></tr>
+      <tr class="high"><td>D7</td><td>6/19四</td><td>603km</td><td>6h58m</td><td>14h</td><td>🔴</td><td>嘉峪关·丹霞</td></tr>
+      <tr class="low"><td>D8</td><td>6/20五</td><td>357km</td><td>4h50m</td><td>7h</td><td>🟢</td><td>祁连草原·门源→✈️</td></tr>
+      <tr class="total-row"><td>合计</td><td></td><td><strong>2,772km</strong></td><td><strong>~37h57m</strong></td><td><strong>~64h</strong></td><td></td><td></td></tr>
     </table>
   </div>
 </div>
 
-<div class="footer">
-  🏔️ 青甘大环线 · 双标签行程卡 · 点击标签切换「行程」和「注意事项」
+</div><!-- end mod-itin -->
+
+<!-- ============================================================ -->
+<!-- MODULE 2: 准备攻略 -->
+<!-- ============================================================ -->
+<div class="module-content" id="mod-prep">
+
+<div class="prep-sec-h">⏰ 出发前必须做好的6件事</div>
+<div class="section-card" style="border-color:var(--red);">
+  <div class="sc-body">
+    <ul class="prep-checklist">
+      <li class="danger"><span class="icn">1️⃣</span><span><span class="strong">莫高窟A类票预约</span> — 微信"莫高窟参观预约网"，A票¥238（8窟+电影+讲解）。6月极紧张，<strong>现在就约</strong></span></li>
+      <li class="danger"><span class="icn">2️⃣</span><span><span class="strong">一嗨/神州租车</span> — 选SUV（探岳/RAV4/CRV），机场取还，买不计免赔。提车拍完整视频</span></li>
+      <li class="danger"><span class="icn">3️⃣</span><span><span class="strong">全程住宿预订</span> — 大柴旦和敦煌6月旺季紧张，大柴旦标间¥500-800，至少提前2周</span></li>
+      <li class="warn"><span class="icn">4️⃣</span><span><span class="strong">离线地图下载</span> — 高德/百度下载"青海省"+"甘肃省"离线包。柴达木、祁连无信号</span></li>
+      <li class="warn"><span class="icn">5️⃣</span><span><span class="strong">药店采购</span> — 葡萄糖口服液(¥5) + 布洛芬 + 氧气瓶(¥20/罐)。红景天提前一周吃</span></li>
+      <li class="warn"><span class="icn">6️⃣</span><span><span class="strong">查15天天气预报</span> — 西北6月温差5-35°C，洋葱穿衣法准备</span></li>
+    </ul>
+  </div>
 </div>
 
+<div class="prep-sec-h">🎒 必备物品清单</div>
+
+<div class="section-card">
+  <div class="sc-header">📄 证件&金钱</div>
+  <div class="sc-body">
+    <div class="item-grid">
+      <div class="item-card"><div class="icn">🪪</div><div class="nm">身份证+驾驶证</div><div class="why">租车、酒店必备</div></div>
+      <div class="item-card"><div class="icn">💳</div><div class="nm">信用卡+现金¥500</div><div class="why">偏远地区备现金</div></div>
+      <div class="item-card"><div class="icn">📱</div><div class="nm">手机+车载快充线</div><div class="why">导航耗电快</div></div>
+      <div class="item-card"><div class="icn">🔋</div><div class="nm">20000mAh充电宝</div><div class="why">长途驾驶必备</div></div>
+    </div>
+  </div>
 </div>
+
+<div class="section-card">
+  <div class="sc-header">💊 药品&健康</div>
+  <div class="sc-body">
+    <div class="item-grid">
+      <div class="item-card"><div class="icn">🧪</div><div class="nm">葡萄糖口服液</div><div class="why">高反急救最有效！¥5/支</div></div>
+      <div class="item-card"><div class="icn">💊</div><div class="nm">布洛芬</div><div class="why">高反头痛特效药</div></div>
+      <div class="item-card"><div class="icn">🫁</div><div class="nm">氧气瓶×2-3罐</div><div class="why">西宁药店¥20，景区¥50</div></div>
+      <div class="item-card"><div class="icn">🌡️</div><div class="nm">感冒药+肠胃药</div><div class="why">温差大+饮食不适</div></div>
+      <div class="item-card"><div class="icn">🤒</div><div class="nm">创可贴+晕车药</div><div class="why">盘山路多</div></div>
+      <div class="item-card"><div class="icn">💧</div><div class="nm">保温杯</div><div class="why">高原多喝热水</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="sc-header">🧴 防晒&护肤</div>
+  <div class="sc-body">
+    <div class="item-grid">
+      <div class="item-card"><div class="icn">🧴</div><div class="nm">防晒霜SPF50+</div><div class="why">紫外线极强！PA+++</div></div>
+      <div class="item-card"><div class="icn">🕶️</div><div class="nm">墨镜</div><div class="why">盐湖反光+开车必备</div></div>
+      <div class="item-card"><div class="icn">🧢</div><div class="nm">遮阳帽+防晒面巾</div><div class="why">物理防晒最有效</div></div>
+      <div class="item-card"><div class="icn">💄</div><div class="nm">润唇膏+保湿霜</div><div class="why">西北极其干燥</div></div>
+      <div class="item-card"><div class="icn">🧻</div><div class="nm">湿纸巾+免洗洗手液</div><div class="why">沿途旱厕没水洗🚽</div></div>
+      <div class="item-card"><div class="icn">🧻</div><div class="nm">卫生纸（多带）</div><div class="why">很多厕所不提供</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="sc-header">🎒 户外&摄影</div>
+  <div class="sc-body">
+    <div class="item-grid">
+      <div class="item-card"><div class="icn">🚁</div><div class="nm">无人机（强烈推荐）</div><div class="why">翡翠湖+水上雅丹+丹霞航拍绝了</div></div>
+      <div class="item-card"><div class="icn">📷</div><div class="nm">相机+备用电池</div><div class="why">低温掉电快·备暖宝宝贴电池</div></div>
+      <div class="item-card"><div class="icn">🩴</div><div class="nm">拖鞋/凉鞋</div><div class="why">茶卡盐湖穿，盐粒刺鞋</div></div>
+      <div class="item-card"><div class="icn">📦</div><div class="nm">密封袋（大+小）</div><div class="why">鸣沙山防沙进手机相机</div></div>
+      <div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备</div></div>
+      <div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋</div><div class="why">车上装杂物方便取用</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="prep-sec-h">👗 穿搭指南</div>
+<div class="section-card" style="border-color:var(--cyan);">
+  <div class="sc-header" style="border-color:var(--cyan);">🧅 核心策略：洋葱叠穿法</div>
+  <div class="sc-body">
+    <p style="font-size:0.85rem;">1️⃣ <strong>底层（排汗）</strong> — 短袖T恤/速干衣。敦煌30°C+时单穿</p>
+    <p style="font-size:0.85rem;margin-top:4px;">2️⃣ <strong>中层（保暖）</strong> — 抓绒衣/薄毛衣。青海湖、祁连15-20°C时加</p>
+    <p style="font-size:0.85rem;margin-top:4px;">3️⃣ <strong>外层（防风防雨）</strong> — 冲锋衣/薄羽绒。早晚5-10°C时穿</p>
+    <p style="font-size:0.78rem;color:var(--fg2);margin-top:8px;">💡 一天经历四季：敦煌30°C → 青海湖5°C。叠穿法热了脱冷了穿。</p>
+  </div>
+</div>
+
+<div class="outfit-grid">
+  <div class="outfit-card"><div class="loc">🏙️ 西宁</div><div class="temps">白天 <span class="d">22-26°C</span> 夜晚 <span class="n">10-14°C</span></div><div class="otft">短袖+薄外套 / 连衣裙+开衫</div></div>
+  <div class="outfit-card"><div class="loc">🏞️ 青海湖</div><div class="temps">白天 <span class="d">15-20°C</span> 夜晚 <span class="n">5-10°C</span></div><div class="otft">长袖+抓绒+冲锋衣。风大，穿白色/红色长裙拍照</div></div>
+  <div class="outfit-card"><div class="loc">🪞 茶卡盐湖</div><div class="temps">白天 <span class="d">18-22°C</span> 夜晚 <span class="n">8-12°C</span></div><div class="otft"><strong>红色/橘色长裙</strong>+拖鞋，湖面白色倒影最明显</div></div>
+  <div class="outfit-card"><div class="loc">💎 翡翠湖</div><div class="temps">白天 <span class="d">20-24°C</span> 夜晚 <span class="n">8-12°C</span></div><div class="otft">白色/米色/浅蓝裙，配翡翠绿湖水</div></div>
+  <div class="outfit-card"><div class="loc">🏛️ 敦煌</div><div class="temps">白天 <span class="d">30-35°C</span> 夜晚 <span class="n">18-22°C</span></div><div class="otft">短袖+防晒衣。鸣沙山穿红色/黑色配沙漠</div></div>
+  <div class="outfit-card"><div class="loc">🌈 七彩丹霞</div><div class="temps">白天 <span class="d">28-32°C</span> 夜晚 <span class="n">16-20°C</span></div><div class="otft"><strong>白色或黑色纯色！</strong>别穿彩色会和丹霞撞色</div></div>
+  <div class="outfit-card"><div class="loc">🏔️ 祁连</div><div class="temps">白天 <span class="d">18-22°C</span> 夜晚 <span class="n">6-10°C</span></div><div class="otft">长袖+薄羽绒/冲锋衣。牛仔风/森系配雪山草原</div></div>
+  <div class="outfit-card"><div class="loc">🌸 门源</div><div class="temps">白天 <span class="d">20-25°C</span> 夜晚 <span class="n">10-14°C</span></div><div class="otft">白色长裙+草帽，油菜花田经典搭配</div></div>
+</div>
+
+<div class="prep-sec-h">📸 拍摄攻略 · 每个景点的出片秘籍</div>
+
+<div class="photo-grid">
+  <div class="photo-card"><div class="loc">🏞️ 青海湖</div><div class="btime">⏰ 09:00-11:00 / 17:00-19:00</div><div class="tips">·环湖西路公路大片·逆光剪影·6月油菜花初开</div><div class="color-tag white">👗 白色/红色</div></div>
+  <div class="photo-card"><div class="loc">🪞 茶卡盐湖</div><div class="btime">⏰ 15:00-18:00（无风+晴天）</div><div class="tips">·湖心人少拍倒影·低角度贴近水面·小火车轨道经典</div><div class="color-tag red">👗 红色/橘色</div></div>
+  <div class="photo-card"><div class="loc">💎 大柴旦翡翠湖</div><div class="btime">⏰ 18:30-20:00（黄金光）</div><div class="tips">·🚁航拍效果是地面5倍·爱心盐湖打卡</div><div class="color-tag white">👗 白色/米色</div></div>
+  <div class="photo-card"><div class="loc">🏆 水上雅丹</div><div class="btime">⏰ 14:00-16:30</div><div class="tips">·🚁航拍雅丹群·快艇¥100从水上看</div><div class="color-tag white">👗 白色/黑色</div></div>
+  <div class="photo-card"><div class="loc">📍 315U型公路</div><div class="btime">⏰ 顺路停</div><div class="tips">·⚠️严禁站路中间！路边拍效果一样</div><div class="color-tag white">👗 牛仔风</div></div>
+  <div class="photo-card"><div class="loc">🗿 黑独山</div><div class="btime">⏰ 10:00-12:00</div><div class="tips">·纯黑山体如水墨画·亮色衣服对比</div><div class="color-tag red">👗 红色/白色</div></div>
+  <div class="photo-card"><div class="loc">🐫 鸣沙山月牙泉</div><div class="btime">⏰ 17:00-21:06（日落全程）</div><div class="tips">·沙丘顶拍月牙泉全景·日落前1h金色光线+骆驼队剪影</div><div class="color-tag red">👗 红色/黑色</div></div>
+  <div class="photo-card"><div class="loc">🌈 七彩丹霞</div><div class="btime">⏰ 16:30-20:39</div><div class="tips">·4号观景台日落最佳·雨后天晴最艳·别穿彩色</div><div class="color-tag white">👗 白色/黑色</div></div>
+  <div class="photo-card"><div class="loc">🏔️ 祁连卓尔山</div><div class="btime">⏰ 13:00-16:00 / 18:00-20:38</div><div class="tips">·山顶拍"东方瑞士"全景·雪山+草原+丹霞同框</div><div class="color-tag green">👗 森系/牛仔</div></div>
+  <div class="photo-card"><div class="loc">🌸 门源油菜花</div><div class="btime">⏰ 11:00-12:00</div><div class="tips">·达坂山观景台俯拍全景·白裙+草帽经典</div><div class="color-tag white">👗 白色长裙</div></div>
+</div>
+
+<div class="section-card">
+  <div class="sc-header">📷 通用拍摄技巧</div>
+  <div class="sc-body" style="font-size:0.82rem;">
+    <p>🌅 <strong>黄金时段</strong> — 日出后1h和日落前1h光线最柔和。西北日落极晚（20:30-21:00）</p>
+    <p style="margin-top:6px;">🚁 <strong>无人机权限</strong> — 大部分景点不禁飞。敦煌莫高窟禁飞。大疆Mini系列<250g不用登记</p>
+    <p style="margin-top:6px;">⚡ <strong>电池保暖</strong> — 低温掉电极快！备暖宝宝贴电池</p>
+    <p style="margin-top:6px;">🎨 <strong>配色原则</strong> — 盐湖穿鲜艳色或白；丹霞穿纯色(黑/白)；草原穿浅色；沙漠穿红色</p>
+    <p style="margin-top:6px;">🧊 <strong>镜头防沙</strong> — 鸣沙山和戈壁风沙大，换镜头背风快速操作。带气吹和清洁布</p>
+  </div>
+</div>
+
+<div class="prep-sec-h">📱 必备App & 小程序</div>
+<div class="section-card">
+  <div class="sc-body">
+    <div class="app-grid">
+      <div class="app-card"><div class="icn">🗺️</div><div><div class="nm">高德/百度地图</div><div class="use">下载青海+甘肃离线包</div></div></div>
+      <div class="app-card"><div class="icn">🎫</div><div><div class="nm">莫高窟参观预约网</div><div class="use">微信小程序·抢A票</div></div></div>
+      <div class="app-card"><div class="icn">🏨</div><div><div class="nm">美团/携程</div><div class="use">订住宿·买门票</div></div></div>
+      <div class="app-card"><div class="icn">🚗</div><div><div class="nm">神州租车/一嗨</div><div class="use">租SUV预订</div></div></div>
+      <div class="app-card"><div class="icn">☁️</div><div><div class="nm">墨迹天气/彩云</div><div class="use">看每个镇精确天气</div></div></div>
+      <div class="app-card"><div class="icn">🎵</div><div><div class="nm">网易云/QQ音乐</div><div class="use">下载歌单！无人区没信号</div></div></div>
+      <div class="app-card"><div class="icn">📸</div><div><div class="nm">小红书</div><div class="use">搜穿搭/拍照机位/最新路况</div></div></div>
+      <div class="app-card"><div class="icn">✈️</div><div><div class="nm">航旅纵横</div><div class="use">航班动态关注</div></div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end mod-prep -->
+
+<!-- ============================================================ -->
+<!-- MODULE 3: 行车路线图 -->
+<!-- ============================================================ -->
+<div class="module-content" id="mod-map">
+  <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap;font-size:0.8rem;color:var(--fg2);">
+    <span>🟡 起终点</span><span>🟣 住宿</span><span>🎯 游玩点</span><span>📍 途经点</span>
+    <span style="margin-left:auto;">共 33 个标记点 · 8天路线</span>
+  </div>
+  <div id="route-map-container" style="width:100%;height:620px;border-radius:14px;border:1px solid var(--border);overflow:hidden;background:var(--bg2);">
+    <div style="padding:60px 20px;text-align:center;color:var(--fg2);">
+      <div style="font-size:3rem;margin-bottom:12px;">🗺️</div>
+      <div style="font-size:1rem;">点击上方「行车路线图」标签加载高德地图</div>
+      <div style="font-size:0.8rem;margin-top:8px;">首次加载可能需要几秒钟</div>
+    </div>
+  </div>
+  <div style="margin-top:10px;font-size:0.75rem;color:var(--fg2);text-align:center;">
+    每条颜色代表一天 · 拖动缩放查看 · 点击标记点查看名称
+  </div>
+</div>
+
+<div class="footer">
+  🏔️ 青甘大环线 · 6/13→6/20 · 一行涵盖行程+准备+路线图
+</div>
+
+</div><!-- end container -->
+
+<!-- AMap JS API v2.0 -->
+<script src="https://webapi.amap.com/maps?v=2.0&key=cee46c6dc9ef5ffd9a0da6789ffad943"></script>
+<script src="route_data.js"></script>
+<script>
+// ===== 青甘大环线 路线图数据 =====
+const WAYPOINTS = [
+  ["✈️ 西宁曹家堡机场", 101.76, 36.68, "start", 1],
+  ["🏨 西宁市区", 101.78, 36.62, "stay", 1],
+  ["📍 日月山", 101.09, 36.44, "pass", 2],
+  ["🎯 青海湖黑马河", 99.78, 36.73, "stop", 2],
+  ["📍 橡皮山(3,817m)", 99.60, 36.75, "pass", 2],
+  ["🎯 茶卡盐湖", 99.13, 36.69, "stop", 2],
+  ["🏨 德令哈", 97.36, 37.37, "stay", 2],
+  ["📍 柴达木盆地(穿越)", 96.50, 37.00, "pass", 3],
+  ["🎯 察尔汗盐湖", 95.22, 36.83, "stop", 3],
+  ["🏨 格尔木", 94.93, 36.41, "stay", 3],
+  ["📍 315U型公路", 94.97, 37.39, "pass", 4],
+  ["🎯 水上雅丹", 93.77, 37.62, "stop", 4],
+  ["🏨 大柴旦镇", 95.37, 37.85, "stay", 4],
+  ["🎯 大柴旦翡翠湖", 95.27, 37.87, "stop", 5],
+  ["📍 当金山口", 94.27, 39.32, "pass", 5],
+  ["📍 黑独山", 94.34, 39.63, "pass", 5],
+  ["🎯 石油小镇", 94.27, 39.41, "stop", 5],
+  ["🎯 鸣沙山月牙泉", 94.68, 40.09, "stop", 5],
+  ["🏨 敦煌市", 94.66, 40.14, "stay", 5],
+  ["🎯 莫高窟", 94.81, 40.04, "stop", 6],
+  ["📍 大地之子", 95.78, 40.52, "pass", 7],
+  ["🎯 嘉峪关关城", 98.29, 39.77, "stop", 7],
+  ["🎯 张掖七彩丹霞", 100.06, 38.97, "stop", 7],
+  ["🏨 张掖", 100.45, 38.93, "stay", 7],
+  ["📍 扁都口", 100.81, 38.43, "pass", 8],
+  ["🌿 祁连大草原", 100.95, 37.96, "stop", 8],
+  ["🎯 门源油菜花海", 101.61, 37.39, "stop", 8],
+  ["✈️ 西宁曹家堡机场", 101.76, 36.68, "end", 8],
+];
+
+const DAY_COLORS = {1:"#3b82f6",2:"#10b981",3:"#f59e0b",4:"#a855f7",5:"#ef4444",6:"#06b6d4",7:"#f97316",8:"#84cc16"};
+const DAY_NAMES = {1:"6/13",2:"6/14",3:"6/15",4:"6/16",5:"6/17",6:"6/18",7:"6/19",8:"6/20"};
+
+let routeMap = null;
+
+function initRouteMap() {
+  const container = document.getElementById('route-map-container');
+  if (!container || routeMap) return;
+  if (typeof AMap === 'undefined') { setTimeout(initRouteMap, 1000); return; }
+
+  container.innerHTML = '<div id="amap-container" style="width:100%;height:100%;"></div>';
+
+  routeMap = new AMap.Map('amap-container', {
+    zoom: 6.5, center: [99.5, 37.8],
+    viewMode: '2D',
+    mapStyle: 'amap://styles/light',
+    resizeEnable: true,
+    lang: 'zh_cn',
+  });
+
+  // 按天分组
+  var groups = {};
+  WAYPOINTS.forEach(function(wp) {
+    var d = wp[4];
+    if (!groups[d]) groups[d] = [];
+    groups[d].push({ n:wp[0], lng:wp[1], lat:wp[2], t:wp[3] });
+  });
+
+    // 路线标记 + 直线连接 + 天数标签
+    Object.keys(groups).sort().forEach(function(day) {
+      var pts = groups[day];
+      var color = DAY_COLORS[day];
+
+      // 天数圆圈
+      if (pts.length > 0) {
+        var mid = pts[Math.floor(pts.length / 2)];
+        var dm = new AMap.Marker({
+          content: '<div style="background:'+color+';color:#000;width:32px;height:32px;border-radius:50%;text-align:center;line-height:32px;font-size:14px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,0.4);">'+day+'</div>',
+          position: [mid.lng, mid.lat], offset: new AMap.Pixel(-16, -16)
+        });
+        routeMap.add(dm);
+      }
+    });
+
+  // 第二步：标记点
+  WAYPOINTS.forEach(function(wp) {
+    var wn = wp[0], wlng = wp[1], wlat = wp[2], wtype = wp[3], wday = wp[4];
+    var c = DAY_COLORS[wday];
+    var bg, fg;
+    if (wtype === 'start' || wtype === 'end') { bg = '#f59e0b'; fg = '#000'; }
+    else if (wtype === 'stay') { bg = '#a855f7'; fg = '#fff'; wn = '🏨 ' + wn.replace('🏨 ',''); }
+    else if (wtype === 'stop') { bg = c; fg = '#000'; }
+    else { bg = '#334155'; fg = '#cbd5e1'; }
+
+    var m = new AMap.Marker({
+      content: '<div style="background:'+bg+';color:'+fg+';padding:3px 10px;border-radius:14px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,0.3);">'+wn+'</div>',
+      position: [wlng, wlat], offset: new AMap.Pixel(-70, -14)
+    });
+    routeMap.add(m);
+  });
+
+  // 第三步：用预计算路线数据画实际驾车路线
+  try {
+    var routeLoaded = typeof ROUTE_DATA !== 'undefined';
+    if (!routeLoaded) {
+      // Show error
+      var errorDiv = document.createElement('div');
+      errorDiv.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(239,68,68,0.9);color:#fff;padding:14px 20px;border-radius:10px;font-size:14px;z-index:999;">ROUTE_DATA 未加载！请检查 route_data.js</div>';
+      document.getElementById('map-container-wrap').appendChild(errorDiv.firstElementChild);
+      return;
+    }
+
+    var byDay = {};
+    var entries = typeof Object.entries === 'function' ? Object.entries(ROUTE_DATA) : Object.keys(ROUTE_DATA).map(function(k) { return [k, ROUTE_DATA[k]]; });
+    entries.forEach(function(kv) {
+      var d = kv[1].d || 1;
+      if (!byDay[d]) byDay[d] = [];
+      byDay[d].push(kv[1].p);
+    });
+
+    var totalPolylines = 0;
+    Object.keys(byDay).sort().forEach(function(day) {
+      var color = DAY_COLORS[day] || '#888';
+      var routes = byDay[day];
+      
+      routes.forEach(function(pathArray) {
+        var amapPath = pathArray.map(function(p) { return [p[0], p[1]]; });
+        var poly = new AMap.Polyline({
+          path: amapPath,
+          strokeColor: color,
+          strokeWeight: 5,
+          strokeOpacity: 0.9,
+          strokeStyle: 'solid',
+          lineJoin: 'round',
+          lineCap: 'round',
+        });
+        routeMap.add(poly);
+        totalPolylines++;
+      });
+    });
+
+    // 适配视野
+    routeMap.setFitView(null, false, [60, 60, 60, 60]);
+    
+  } catch(e) {
+    var errDiv = document.createElement('div');
+    errDiv.innerHTML = '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(239,68,68,0.9);color:#fff;padding:14px 20px;border-radius:10px;font-size:14px;z-index:999;">JS错误: '+e.message+'</div>';
+    document.getElementById('route-map-container').appendChild(errDiv.firstElementChild);
+  }
+
+  // 图例
+  setTimeout(() => {
+    const leg = document.createElement('div');
+    leg.innerHTML = `
+      <div style="position:absolute;bottom:20px;left:20px;background:rgba(15,23,42,0.92);border:1px solid #334155;border-radius:10px;padding:10px 14px;font-size:12px;color:#e2e8f0;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+        <div style="font-weight:700;margin-bottom:6px;color:#f59e0b;">📋 图例</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px 10px;margin-bottom:4px;">
+          ${Object.entries(DAY_COLORS).map(([d,c]) =>
+            `<span style="display:flex;align-items:center;gap:3px;"><span style="display:inline-block;width:16px;height:4px;border-radius:2px;background:${c};"></span> D${d}</span>`
+          ).join('')}
+        </div>
+        <div style="font-size:10px;color:#94a3b8;">🟡起终点 🟣住宿 🎯游玩 ⚪途经 | 实线=驾车路线(预计算)</div>
+      </div>`;
+    document.getElementById('route-map-container').appendChild(leg.firstElementChild);
+  }, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const origSwitch = window.switchModule;
+  window.switchModule = function(mod) {
+    origSwitch(mod);
+    if (mod === 'map') setTimeout(initRouteMap, 1000);
+  };
+});
+</script>
 </body>
 </html>
