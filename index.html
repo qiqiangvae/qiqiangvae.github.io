@@ -180,8 +180,8 @@
     <div style="font-size:0.65rem;color:var(--fg2);font-weight:400;margin-top:2px;">8天详细日程+路程+避坑</div>
   </button>
   <button class="module-btn" onclick="switchModule('prep')">
-    🎒 准备攻略
-    <div style="font-size:0.65rem;color:var(--fg2);font-weight:400;margin-top:2px;">物品·穿搭·拍摄·App</div>
+    <div>🎒 准备攻略</div>
+    <div class="sub-lbl">物品·穿搭·拍摄·饮食</div>
   </button>
   <button class="module-btn" onclick="switchModule('map')">
     🗺️ 行车路线图
@@ -519,13 +519,51 @@ document.addEventListener('DOMContentLoaded', initTabs);
 <!-- ============================================================ -->
 <div class="module-content" id="mod-prep">
 
+<style>
+.prep-tab-bar { display:flex; gap:0; margin-bottom:16px; border-radius:10px; overflow:hidden; border:1px solid var(--border); background:var(--bg2); }
+.prep-tab-btn { flex:1; padding:10px 6px; border:none; background:transparent; color:var(--fg2); font-size:0.78rem; font-weight:600; cursor:pointer; transition:0.2s; font-family:inherit; white-space:nowrap; }
+.prep-tab-btn:hover { background:rgba(255,255,255,0.03); color:var(--fg); }
+.prep-tab-btn.active { background:var(--card); color:var(--cyan); box-shadow:inset 0 -3px 0 var(--cyan); }
+.prep-pane { display:none; }
+.prep-pane.active { display:block; }
+.food-city { background:var(--card); border-radius:10px; padding:12px 14px; margin-bottom:10px; border-left:3px solid var(--cyan); }
+.food-city h3 { font-size:0.9rem; margin:0 0 8px 0; color:var(--cyan); }
+.food-dish { font-size:0.82rem; padding:3px 0; border-bottom:1px solid rgba(255,255,255,0.05); }
+.food-dish:last-child { border-bottom:none; }
+.food-dish .n { font-weight:600; }
+.food-dish .d { font-size:0.75rem; color:var(--fg2); }
+.food-tip { font-size:0.75rem; color:var(--amber); margin-top:6px; }
+.food-rec { font-size:0.75rem; color:var(--em); }
+</style>
+
+<div class="prep-tab-bar">
+  <button class="prep-tab-btn active" onclick="switchPrepTab('checklist')">🎒 准备</button>
+  <button class="prep-tab-btn" onclick="switchPrepTab('outfit')">👗 穿搭</button>
+  <button class="prep-tab-btn" onclick="switchPrepTab('photo')">📸 拍摄</button>
+  <button class="prep-tab-btn" onclick="switchPrepTab('food')">🍜 饮食</button>
+</div>
+
+<script>
+function switchPrepTab(tab) {
+  document.querySelectorAll('.prep-tab-btn').forEach(function(b){b.classList.remove('active')});
+  document.querySelectorAll('.prep-pane').forEach(function(p){p.classList.remove('active')});
+  var btn = document.querySelector('.prep-tab-btn[onclick*="'+tab+'"]');
+  var pane = document.getElementById('prep-'+tab);
+  if(btn) btn.classList.add('active');
+  if(pane) pane.classList.add('active');
+}
+</script>
+
+<!-- TAB 1: 行前准备 -->
+<div class="prep-pane active" id="prep-checklist">
+
 <div class="prep-sec-h">⏰ 出发前必须做好的6件事</div>
 <div class="section-card" style="border-color:var(--red);">
   <div class="sc-body">
     <ul class="prep-checklist">
       <li class="danger"><span class="icn">1️⃣</span><span><span class="strong">莫高窟A类票预约</span> — 微信"莫高窟参观预约网"，A票¥238（8窟+电影+讲解）。6月极紧张，<strong>现在就约</strong></span></li>
       <li class="danger"><span class="icn">2️⃣</span><span><span class="strong">一嗨/神州租车</span> — 选SUV（探岳/RAV4/CRV），机场取还，买不计免赔。提车拍完整视频</span></li>
-      <li class="danger"><span class="icn">3️⃣</span><span><span class="strong">全程住宿预订</span> — 大柴旦和敦煌6月旺季紧张，大柴旦标间¥500-800，至少提前2周</span></li>
+      <li class="danger"><span class="icn">3️⃣</span><span><span class="strong">全程住宿预订</span> — 大柴旦和敦煌6月旺季紧张，至少提前2周</span></li>
       <li class="warn"><span class="icn">4️⃣</span><span><span class="strong">离线地图下载</span> — 高德/百度下载"青海省"+"甘肃省"离线包。柴达木、祁连无信号</span></li>
       <li class="warn"><span class="icn">5️⃣</span><span><span class="strong">药店采购</span> — 葡萄糖口服液(¥5) + 布洛芬 + 氧气瓶(¥20/罐)。红景天提前一周吃</span></li>
       <li class="warn"><span class="icn">6️⃣</span><span><span class="strong">查15天天气预报</span> — 西北6月温差5-35°C，洋葱穿衣法准备</span></li>
@@ -535,59 +573,56 @@ document.addEventListener('DOMContentLoaded', initTabs);
 
 <div class="prep-sec-h">🎒 必备物品清单</div>
 
-<div class="section-card">
-  <div class="sc-header">📄 证件&金钱</div>
-  <div class="sc-body">
-    <div class="item-grid">
-      <div class="item-card"><div class="icn">🪪</div><div class="nm">身份证+驾驶证</div><div class="why">租车、酒店必备</div></div>
-      <div class="item-card"><div class="icn">💳</div><div class="nm">信用卡+现金¥500</div><div class="why">偏远地区备现金</div></div>
-      <div class="item-card"><div class="icn">📱</div><div class="nm">手机+车载快充线</div><div class="why">导航耗电快</div></div>
-      <div class="item-card"><div class="icn">🔋</div><div class="nm">20000mAh充电宝</div><div class="why">长途驾驶必备</div></div>
-    </div>
-  </div>
-</div>
+<div class="section-card"><div class="sc-header">📄 证件&金钱</div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🪪</div><div class="nm">身份证+驾驶证</div><div class="why">租车、酒店必备</div></div>
+<div class="item-card"><div class="icn">💳</div><div class="nm">信用卡+现金¥500</div><div class="why">偏远地区备现金</div></div>
+<div class="item-card"><div class="icn">📱</div><div class="nm">手机+车载快充线</div><div class="why">导航耗电快</div></div>
+<div class="item-card"><div class="icn">🔋</div><div class="nm">20000mAh充电宝</div><div class="why">长途驾驶必备</div></div>
+</div></div></div>
 
-<div class="section-card">
-  <div class="sc-header">💊 药品&健康</div>
-  <div class="sc-body">
-    <div class="item-grid">
-      <div class="item-card"><div class="icn">🧪</div><div class="nm">葡萄糖口服液</div><div class="why">高反急救最有效！¥5/支</div></div>
-      <div class="item-card"><div class="icn">💊</div><div class="nm">布洛芬</div><div class="why">高反头痛特效药</div></div>
-      <div class="item-card"><div class="icn">🫁</div><div class="nm">氧气瓶×2-3罐</div><div class="why">西宁药店¥20，景区¥50</div></div>
-      <div class="item-card"><div class="icn">🌡️</div><div class="nm">感冒药+肠胃药</div><div class="why">温差大+饮食不适</div></div>
-      <div class="item-card"><div class="icn">🤒</div><div class="nm">创可贴+晕车药</div><div class="why">盘山路多</div></div>
-      <div class="item-card"><div class="icn">💧</div><div class="nm">保温杯</div><div class="why">高原多喝热水</div></div>
-    </div>
-  </div>
-</div>
+<div class="section-card"><div class="sc-header">💊 药品&健康</div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🧪</div><div class="nm">葡萄糖口服液</div><div class="why">高反急救最有效！¥5/支</div></div>
+<div class="item-card"><div class="icn">💊</div><div class="nm">布洛芬</div><div class="why">高反头痛特效药</div></div>
+<div class="item-card"><div class="icn">🫁</div><div class="nm">氧气瓶×2-3罐</div><div class="why">西宁药店¥20，景区¥50</div></div>
+<div class="item-card"><div class="icn">🌡️</div><div class="nm">感冒药+肠胃药</div><div class="why">温差大+饮食不适</div></div>
+<div class="item-card"><div class="icn">🤒</div><div class="nm">创可贴+晕车药</div><div class="why">盘山路多</div></div>
+<div class="item-card"><div class="icn">💧</div><div class="nm">保温杯</div><div class="why">高原多喝热水</div></div>
+</div></div></div>
 
-<div class="section-card">
-  <div class="sc-header">🧴 防晒&护肤</div>
-  <div class="sc-body">
-    <div class="item-grid">
-      <div class="item-card"><div class="icn">🧴</div><div class="nm">防晒霜SPF50+</div><div class="why">紫外线极强！PA+++</div></div>
-      <div class="item-card"><div class="icn">🕶️</div><div class="nm">墨镜</div><div class="why">盐湖反光+开车必备</div></div>
-      <div class="item-card"><div class="icn">🧢</div><div class="nm">遮阳帽+防晒面巾</div><div class="why">物理防晒最有效</div></div>
-      <div class="item-card"><div class="icn">💄</div><div class="nm">润唇膏+保湿霜</div><div class="why">西北极其干燥</div></div>
-      <div class="item-card"><div class="icn">🧻</div><div class="nm">湿纸巾+免洗洗手液</div><div class="why">沿途旱厕没水洗🚽</div></div>
-      <div class="item-card"><div class="icn">🧻</div><div class="nm">卫生纸（多带）</div><div class="why">很多厕所不提供</div></div>
-    </div>
-  </div>
-</div>
+<div class="section-card"><div class="sc-header">🧴 防晒&护肤</div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🧴</div><div class="nm">防晒霜SPF50+</div><div class="why">紫外线极强！PA+++</div></div>
+<div class="item-card"><div class="icn">🕶️</div><div class="nm">墨镜</div><div class="why">盐湖反光+开车必备</div></div>
+<div class="item-card"><div class="icn">🧢</div><div class="nm">遮阳帽+防晒面巾</div><div class="why">物理防晒最有效</div></div>
+<div class="item-card"><div class="icn">💄</div><div class="nm">润唇膏+保湿霜</div><div class="why">西北极其干燥</div></div>
+<div class="item-card"><div class="icn">🧻</div><div class="nm">湿纸巾+免洗洗手液</div><div class="why">沿途旱厕没水洗🚽</div></div>
+<div class="item-card"><div class="icn">🧻</div><div class="nm">卫生纸（多带）</div><div class="why">很多厕所不提供</div></div>
+</div></div></div>
 
-<div class="section-card">
-  <div class="sc-header">🎒 户外&摄影</div>
-  <div class="sc-body">
-    <div class="item-grid">
-      <div class="item-card"><div class="icn">🚁</div><div class="nm">无人机（强烈推荐）</div><div class="why">翡翠湖+水上雅丹+丹霞航拍绝了</div></div>
-      <div class="item-card"><div class="icn">📷</div><div class="nm">相机+备用电池</div><div class="why">低温掉电快·备暖宝宝贴电池</div></div>
-      <div class="item-card"><div class="icn">🩴</div><div class="nm">拖鞋/凉鞋</div><div class="why">茶卡盐湖穿，盐粒刺鞋</div></div>
-      <div class="item-card"><div class="icn">📦</div><div class="nm">密封袋（大+小）</div><div class="why">鸣沙山防沙进手机相机</div></div>
-      <div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备</div></div>
-      <div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋</div><div class="why">车上装杂物方便取用</div></div>
-    </div>
-  </div>
-</div>
+<div class="section-card"><div class="sc-header">🎒 户外&摄影</div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🚁</div><div class="nm">无人机（强烈推荐）</div><div class="why">翡翠湖+丹霞航拍绝了</div></div>
+<div class="item-card"><div class="icn">📷</div><div class="nm">相机+备用电池</div><div class="why">低温掉电快·备暖宝宝</div></div>
+<div class="item-card"><div class="icn">🩴</div><div class="nm">拖鞋/凉鞋</div><div class="why">茶卡盐湖穿</div></div>
+<div class="item-card"><div class="icn">📦</div><div class="nm">密封袋（大+小）</div><div class="why">鸣沙山防沙</div></div>
+<div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备</div></div>
+<div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋</div><div class="why">车上装杂物</div></div>
+</div></div></div>
+
+<div class="prep-sec-h">📱 必备App & 小程序</div>
+<div class="section-card"><div class="sc-body"><div class="app-grid">
+<div class="app-card"><div class="icn">🗺️</div><div><div class="nm">高德/百度地图</div><div class="use">下载青海+甘肃离线包</div></div></div>
+<div class="app-card"><div class="icn">🎫</div><div><div class="nm">莫高窟参观预约网</div><div class="use">微信小程序·抢A票</div></div></div>
+<div class="app-card"><div class="icn">🏨</div><div><div class="nm">美团/携程</div><div class="use">订住宿·买门票</div></div></div>
+<div class="app-card"><div class="icn">🚗</div><div><div class="nm">神州租车/一嗨</div><div class="use">租SUV预订</div></div></div>
+<div class="app-card"><div class="icn">☁️</div><div><div class="nm">墨迹天气/彩云</div><div class="use">看每个镇精确天气</div></div></div>
+<div class="app-card"><div class="icn">🎵</div><div><div class="nm">网易云/QQ音乐</div><div class="use">下载歌单！无人区没信号</div></div></div>
+<div class="app-card"><div class="icn">📸</div><div><div class="nm">小红书</div><div class="use">搜穿搭/拍照机位/最新路况</div></div></div>
+<div class="app-card"><div class="icn">✈️</div><div><div class="nm">航旅纵横</div><div class="use">航班动态关注</div></div></div>
+</div></div></div>
+
+</div><!-- end prep-checklist -->
+
+<!-- TAB 2: 穿搭指南 -->
+<div class="prep-pane" id="prep-outfit">
 
 <div class="prep-sec-h">👗 穿搭指南</div>
 <div class="section-card" style="border-color:var(--cyan);">
@@ -611,18 +646,23 @@ document.addEventListener('DOMContentLoaded', initTabs);
   <div class="outfit-card"><div class="loc">🌸 门源</div><div class="temps">白天 <span class="d">20-25°C</span> 夜晚 <span class="n">10-14°C</span></div><div class="otft">白色长裙+草帽，油菜花田经典搭配</div></div>
 </div>
 
+</div><!-- end prep-outfit -->
+
+<!-- TAB 3: 拍摄攻略 -->
+<div class="prep-pane" id="prep-photo">
+
 <div class="prep-sec-h">📸 拍摄攻略 · 每个景点的出片秘籍</div>
 
 <div class="photo-grid">
   <div class="photo-card"><div class="loc">🏞️ 青海湖</div><div class="btime">⏰ 09:00-11:00 / 17:00-19:00</div><div class="tips">·环湖西路公路大片·逆光剪影·6月油菜花初开</div><div class="color-tag white">👗 白色/红色</div></div>
   <div class="photo-card"><div class="loc">🪞 茶卡盐湖</div><div class="btime">⏰ 15:00-18:00（无风+晴天）</div><div class="tips">·湖心人少拍倒影·低角度贴近水面·小火车轨道经典</div><div class="color-tag red">👗 红色/橘色</div></div>
   <div class="photo-card"><div class="loc">💎 大柴旦翡翠湖</div><div class="btime">⏰ 18:30-20:00（黄金光）</div><div class="tips">·🚁航拍效果是地面5倍·爱心盐湖打卡</div><div class="color-tag white">👗 白色/米色</div></div>
-  <div class="photo-card"><div class="loc">🏆 水上雅丹</div><div class="btime">⏰ 14:00-16:30</div><div class="tips">·🚁航拍雅丹群·快艇¥100从水上看</div><div class="color-tag white">👗 白色/黑色</div></div>
+  <div class="photo-card"><div class="loc">🏆 南八仙雅丹</div><div class="btime">⏰ 11:00-14:00</div><div class="tips">·🚁航拍雅丹群·陆上雅丹规模宏大·免费</div><div class="color-tag white">👗 白色/黑色</div></div>
   <div class="photo-card"><div class="loc">📍 315U型公路</div><div class="btime">⏰ 顺路停</div><div class="tips">·⚠️严禁站路中间！路边拍效果一样</div><div class="color-tag white">👗 牛仔风</div></div>
   <div class="photo-card"><div class="loc">🗿 黑独山</div><div class="btime">⏰ 10:00-12:00</div><div class="tips">·纯黑山体如水墨画·亮色衣服对比</div><div class="color-tag red">👗 红色/白色</div></div>
   <div class="photo-card"><div class="loc">🐫 鸣沙山月牙泉</div><div class="btime">⏰ 17:00-21:06（日落全程）</div><div class="tips">·沙丘顶拍月牙泉全景·日落前1h金色光线+骆驼队剪影</div><div class="color-tag red">👗 红色/黑色</div></div>
   <div class="photo-card"><div class="loc">🌈 七彩丹霞</div><div class="btime">⏰ 16:30-20:39</div><div class="tips">·4号观景台日落最佳·雨后天晴最艳·别穿彩色</div><div class="color-tag white">👗 白色/黑色</div></div>
-  <div class="photo-card"><div class="loc">🏔️ 祁连卓尔山</div><div class="btime">⏰ 13:00-16:00 / 18:00-20:38</div><div class="tips">·山顶拍"东方瑞士"全景·雪山+草原+丹霞同框</div><div class="color-tag green">👗 森系/牛仔</div></div>
+  <div class="photo-card"><div class="loc">🏔️ 祁连草原</div><div class="btime">⏰ 09:00-11:00</div><div class="tips">·草原+雪山背景·骑马拍照·森系出片</div><div class="color-tag green">👗 森系/牛仔</div></div>
   <div class="photo-card"><div class="loc">🌸 门源油菜花</div><div class="btime">⏰ 11:00-12:00</div><div class="tips">·达坂山观景台俯拍全景·白裙+草帽经典</div><div class="color-tag white">👗 白色长裙</div></div>
 </div>
 
@@ -637,21 +677,107 @@ document.addEventListener('DOMContentLoaded', initTabs);
   </div>
 </div>
 
-<div class="prep-sec-h">📱 必备App & 小程序</div>
-<div class="section-card">
-  <div class="sc-body">
-    <div class="app-grid">
-      <div class="app-card"><div class="icn">🗺️</div><div><div class="nm">高德/百度地图</div><div class="use">下载青海+甘肃离线包</div></div></div>
-      <div class="app-card"><div class="icn">🎫</div><div><div class="nm">莫高窟参观预约网</div><div class="use">微信小程序·抢A票</div></div></div>
-      <div class="app-card"><div class="icn">🏨</div><div><div class="nm">美团/携程</div><div class="use">订住宿·买门票</div></div></div>
-      <div class="app-card"><div class="icn">🚗</div><div><div class="nm">神州租车/一嗨</div><div class="use">租SUV预订</div></div></div>
-      <div class="app-card"><div class="icn">☁️</div><div><div class="nm">墨迹天气/彩云</div><div class="use">看每个镇精确天气</div></div></div>
-      <div class="app-card"><div class="icn">🎵</div><div><div class="nm">网易云/QQ音乐</div><div class="use">下载歌单！无人区没信号</div></div></div>
-      <div class="app-card"><div class="icn">📸</div><div><div class="nm">小红书</div><div class="use">搜穿搭/拍照机位/最新路况</div></div></div>
-      <div class="app-card"><div class="icn">✈️</div><div><div class="nm">航旅纵横</div><div class="use">航班动态关注</div></div></div>
-    </div>
-  </div>
+</div><!-- end prep-photo -->
+
+<!-- TAB 4: 饮食指南 -->
+<div class="prep-pane" id="prep-food">
+
+<div class="prep-sec-h">🍜 饮食指南 · 一路吃到头</div>
+
+<div class="food-city">
+<h3>🏙️ 西宁（D1）</h3>
+<div class="food-dish"><span class="n">青海土火锅</span><span class="d">铜锅+牦牛肉高汤，自然醇厚</span></div>
+<div class="food-dish"><span class="n">手抓羊肉</span><span class="d">清水煮藏系绵羊，蘸椒盐吃本味</span></div>
+<div class="food-dish"><span class="n">青海老酸奶</span><span class="d">牦牛奶发酵，表面金黄奶皮，加白糖</span></div>
+<div class="food-dish"><span class="n">酿皮+甜醅</span><span class="d">酸辣开胃酿皮+青稞发酵甜醅，绝配</span></div>
+<div class="food-rec">📍 饮马街土火锅 | 莫家街小吃 | 水井巷 · 人均¥40-80</div>
+<div class="food-tip">⚠️ 海拔2,260m，初到高原第一餐别吃太撑</div>
 </div>
+
+<div class="food-city">
+<h3>🏞️ 青海湖/茶卡（D2）</h3>
+<div class="food-dish"><span class="n">牧民家牦牛酸奶</span><span class="d">整个环线最好喝的酸奶！厚奶皮+撒白糖</span></div>
+<div class="food-dish"><span class="n">炕锅羊肉</span><span class="d">羊肉+高原土豆铁锅炕制，土豆比肉香</span></div>
+<div class="food-dish"><span class="n">糌粑</span><span class="d">青稞炒面+酥油茶捏团，藏族传统主食</span></div>
+<div class="food-rec">📍 黑马河乡餐馆 · 人均¥50-80</div>
+<div class="food-tip">⚠️ 湟鱼（青海湖裸鲤）是保护动物，严禁食用！</div>
+</div>
+
+<div class="food-city">
+<h3>🏜️ 德令哈（D3途经）</h3>
+<div class="food-dish"><span class="n">退骨牛肉</span><span class="d">骨头退回称重只算净肉，海西特色吃法</span></div>
+<div class="food-dish"><span class="n">尕面片</span><span class="d">手工揪面片+牛肉汤+土豆粉条，青海家常</span></div>
+<div class="food-rec">📍 市区步行街清真餐馆 · 人均¥40-70</div>
+</div>
+
+<div class="food-city">
+<h3>🌃 格尔木（D3宿）</h3>
+<div class="food-dish"><span class="n">格尔木烤羊肉</span><span class="d">青海烤羊肉标杆！昆仑山下羊肉炭火慢烤</span></div>
+<div class="food-dish"><span class="n">青海土火锅</span><span class="d">格尔木版本肉更多更实惠</span></div>
+<div class="food-dish"><span class="n">回族牛肉面</span><span class="d">回族人口多，面食水准极高</span></div>
+<div class="food-rec">📍 昆仑路/八一路 · 夜市烤羊肉 · 人均¥40-70</div>
+</div>
+
+<div class="food-city">
+<h3>⛰️ 大柴旦（D4宿）</h3>
+<div class="food-dish"><span class="n">西北面食+川菜</span><span class="d">戈壁小镇，牛肉面¥15-25，川菜馆多</span></div>
+<div class="food-rec">📍 主街面馆/川菜馆 · 面食¥15-25，川菜¥40-60</div>
+<div class="food-tip">⚠️ 翡翠湖内无餐饮，自备干粮和水！去南八仙沿途无补给</div>
+</div>
+
+<div class="food-city">
+<h3>🐫 敦煌（D5-D6宿）</h3>
+<div class="food-dish"><span class="n">驴肉黄面</span><span class="d">丝路美食活化石！手工黄面+卤驴肉</span></div>
+<div class="food-dish"><span class="n">羊肉粉汤</span><span class="d">羊骨浓汤+羊肉片+粉丝，早餐绝配</span></div>
+<div class="food-dish"><span class="n">杏皮水</span><span class="d">李广杏干熬制冰饮，敦煌人的酸梅汤</span></div>
+<div class="food-dish"><span class="n">驼肉宴</span><span class="d">红烧驼肉+驼肉抓饭，丝路珍馐</span></div>
+<div class="food-rec">📍 沙洲夜市 | 达记驴肉黄面 | 月牙泉小镇驼肉宴 · 人均¥40-120</div>
+<div class="food-tip">⚠️ 夏季达37°C，多喝杏皮水防暑</div>
+</div>
+
+<div class="food-city">
+<h3>🏯 嘉峪关（D7途经）</h3>
+<div class="food-dish"><span class="n">嘉峪关烤肉</span><span class="d">非遗技艺！肉块大、火候足、调料香</span></div>
+<div class="food-dish"><span class="n">糊锅</span><span class="d">全国仅此一家！浓稠早餐配麻花泡着吃</span></div>
+<div class="food-rec">📍 富强市场夜市 · 人均¥40-80</div>
+<div class="food-tip">⚠️ 糊锅是早餐，只在上午供应，想吃赶早</div>
+</div>
+
+<div class="food-city">
+<h3>🌈 张掖（D7宿）</h3>
+<div class="food-dish"><span class="n">炒拨拉</span><span class="d">铁鏊子爆炒羊杂，火焰升腾的灵魂美食</span></div>
+<div class="food-dish"><span class="n">搓鱼面</span><span class="d">大豆粉搓成小鱼形状，凉拌解暑</span></div>
+<div class="food-dish"><span class="n">牛肉小饭</span><span class="d">米粒大小面块+牛骨汤，胡椒味浓郁</span></div>
+<div class="food-dish"><span class="n">卷子鸡</span><span class="d">面卷吸饱鸡汤，比鸡肉还抢手</span></div>
+<div class="food-rec">📍 甘州夜市（甘州市场）· 明清街 · 人均¥20-70</div>
+</div>
+
+<div class="food-city">
+<h3>🌸 门源（D8途经）</h3>
+<div class="food-dish"><span class="n">门源奶皮</span><span class="d">祁连草原牛奶脂肪高，奶皮厚实香浓</span></div>
+<div class="food-dish"><span class="n">牦牛酸奶</span><span class="d">油菜花海下的牧场出品</span></div>
+<div class="food-rec">📍 县城/青石嘴镇 · 路边牧民摊位 · 人均¥30-60</div>
+</div>
+
+<div style="background:var(--card);border-radius:10px;padding:12px 14px;margin-top:12px;">
+<div style="font-weight:700;color:var(--amber);margin-bottom:8px;">🎁 值得带走的美食伴手礼</div>
+<div class="food-souvenir">
+<span>🐂 风干牦牛肉干</span><span>🥛 青海老酸奶(包装)</span><span>🌾 青稞饼干/青稞酒</span>
+<span>🍑 李广杏干</span><span>🫐 柴达木黑枸杞</span><span>🫘 临泽小枣</span>
+<span>🌼 昆仑雪菊</span>
+</div>
+<div class="food-tip">💡 西宁大超市买最实惠；景区门口价格翻倍；牦牛肉干低于¥80/斤慎买</div>
+</div>
+
+<div style="background:var(--card);border-radius:10px;padding:12px 14px;margin-top:10px;">
+<div style="font-weight:700;color:var(--red);margin-bottom:6px;">⚠️ 高原饮食注意事项</div>
+<p style="font-size:0.8rem;">· 少食多餐，高原反应影响消化，每餐七分饱<br>
+· 多喝热水少喝冰饮，青海酸奶有助缓解水土不服<br>
+· 清真餐厅不要自带猪肉制品<br>
+· 素食者选择有限（酿皮、酸奶、搓鱼面不加肉、青稞饼）</p>
+</div>
+
+</div><!-- end prep-food -->
 
 </div><!-- end mod-prep -->
 
@@ -670,8 +796,19 @@ document.addEventListener('DOMContentLoaded', initTabs);
       <div style="font-size:0.8rem;margin-top:8px;">首次加载可能需要几秒钟</div>
     </div>
   </div>
-  <div style="margin-top:10px;font-size:0.75rem;color:var(--fg2);text-align:center;">
-    每条颜色代表一天 · 拖动缩放查看 · 点击标记点查看名称
+  <div id="map-legend" style="margin-top:8px;display:none;justify-content:center;flex-wrap:wrap;gap:4px 10px;font-size:0.75rem;color:var(--fg2);">
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#3b82f6;"></span>D1</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#10b981;"></span>D2</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#f59e0b;"></span>D3</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#a855f7;"></span>D4</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#ef4444;"></span>D5</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#06b6d4;"></span>D6</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#f97316;"></span>D7</span>
+    <span style="display:flex;align-items:center;gap:3px;"><span style="width:14px;height:3px;border-radius:1px;background:#84cc16;"></span>D8</span>
+    <span style="margin-left:8px;font-size:0.7rem;">🟡起终点 🟣住宿 🎯游玩</span>
+  </div>
+  <div style="margin-top:6px;font-size:0.7rem;color:var(--fg2);text-align:center;">
+    每条颜色代表一天 · 拖动缩放查看
   </div>
 </div>
 
@@ -836,21 +973,10 @@ function initRouteMap() {
     if (c2) c2.appendChild(errD.firstElementChild);
   }
 
-  // 图例
+  // 图例 — 显示静态图例
   setTimeout(() => {
-    const leg = document.createElement('div');
-    leg.innerHTML = `
-      <div style="position:absolute;bottom:20px;left:20px;background:rgba(15,23,42,0.92);border:1px solid #334155;border-radius:10px;padding:10px 14px;font-size:12px;color:#e2e8f0;z-index:1000;box-shadow:0 4px 12px rgba(0,0,0,0.4);">
-        <div style="font-weight:700;margin-bottom:6px;color:#f59e0b;">📋 图例</div>
-        <div style="display:flex;flex-wrap:wrap;gap:3px 10px;margin-bottom:4px;">
-          ${Object.entries(DAY_COLORS).map(([d,c]) =>
-            `<span style="display:flex;align-items:center;gap:3px;"><span style="display:inline-block;width:16px;height:4px;border-radius:2px;background:${c};"></span> D${d}</span>`
-          ).join('')}
-        </div>
-        <div style="font-size:10px;color:#94a3b8;">🟡起终点 🟣住宿 🎯游玩 ⚪途经 | 实线=驾车路线(预计算)</div>
-      </div>`;
-    var c3 = document.getElementById('route-map-container');
-    if (c3) c3.appendChild(leg.firstElementChild);
+    var leg = document.getElementById('map-legend');
+    if (leg) leg.style.display = 'flex';
   }, 1000);
 }
 
