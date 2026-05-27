@@ -541,6 +541,7 @@ document.addEventListener('DOMContentLoaded', initTabs);
   <button class="prep-tab-btn" onclick="switchPrepTab('outfit')">👗 穿搭</button>
   <button class="prep-tab-btn" onclick="switchPrepTab('photo')">📸 拍摄</button>
   <button class="prep-tab-btn" onclick="switchPrepTab('food')">🍜 饮食</button>
+  <button class="prep-tab-btn" onclick="switchPrepTab('toilet')">🚽 如厕</button>
 </div>
 
 <script>
@@ -606,6 +607,7 @@ function switchPrepTab(tab) {
 <div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备</div></div>
 <div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋</div><div class="why">车上装杂物</div></div>
 </div></div></div>
+
 
 <div class="prep-sec-h">📱 必备App & 小程序</div>
 <div class="section-card"><div class="sc-body"><div class="app-grid">
@@ -815,6 +817,96 @@ function switchPrepTab(tab) {
 </div>
 
 </div><!-- end prep-food -->
+
+<!-- TAB 5: 如厕指南 -->
+<div class="prep-pane" id="prep-toilet">
+
+<div class="prep-sec-h">🚽 卫生间生存指南 · 女生必看</div>
+<div class="section-card" style="border-color:var(--red);">
+  <div class="sc-header" style="border-color:var(--red);">⚠️ 全程最大的坑，不是高反</div>
+  <div class="sc-body" style="font-size:0.82rem;">
+    <p>自驾过这条线的老司机都知道：<strong>厕所问题比高反更折磨人</strong>。柴达木盆地200km+无厕所，沿途旱厕多、脏、没水。以下基于高德POI实测数据整理。</p>
+  </div>
+</div>
+
+<div class="section-card" style="border-color:var(--amber);">
+  <div class="sc-header" style="border-color:var(--amber);">📍 沿途服务区厕所分布</div>
+  <div class="sc-body">
+    <table style="width:100%;font-size:0.75rem;border-collapse:collapse;">
+      <tr style="border-bottom:1px solid var(--border);"><th style="text-align:left;padding:4px;">道路</th><th style="text-align:left;padding:4px;">服务区</th><th style="text-align:left;padding:4px;">厕所</th><th style="text-align:left;padding:4px;">地段</th></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G6京藏</td><td style="padding:3px;">莫多吉停车区</td><td style="padding:3px;">✅</td><td style="padding:3px;">湟源→倒淌河</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G6京藏</td><td style="padding:3px;">倒淌河停车区</td><td style="padding:3px;">✅</td><td style="padding:3px;">日月山前</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G6京藏</td><td style="padding:3px;">共和服务区</td><td style="padding:3px;">✅较大</td><td style="padding:3px;">青海湖南</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">S20德小</td><td style="padding:3px;">乌兰服务区</td><td style="padding:3px;">✅</td><td style="padding:3px;">茶卡→德令哈</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">S20德小</td><td style="padding:3px;">怀头他拉服务区</td><td style="padding:3px;">✅</td><td style="padding:3px;">德令哈→大柴旦</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G315</td><td style="padding:3px;">东台服务区</td><td style="padding:3px;">✅<strong>唯一</strong></td><td style="padding:3px;">U型公路段</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G3011柳格</td><td style="padding:3px;">鱼卡服务区</td><td style="padding:3px;">✅</td><td style="padding:3px;">大柴旦→格尔木</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G3011柳格</td><td style="padding:3px;">当金山南停车区</td><td style="padding:3px;">✅24h</td><td style="padding:3px;">青海入甘前</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G3011柳格</td><td style="padding:3px;">阿克塞服务区</td><td style="padding:3px;">✅24h</td><td style="padding:3px;">下山后第一站</td></tr>
+      <tr style="border-bottom:1px solid var(--border);"><td style="padding:3px;">G227</td><td style="padding:3px;">扁都口服务区</td><td style="padding:3px;">✅有</td><td style="padding:3px;">祁连山北麓</td></tr>
+      <tr style="border-bottom:none;"><td style="padding:3px;">G0611张汶</td><td style="padding:3px;">花海服务区</td><td style="padding:3px;">✅</td><td style="padding:3px;">门源</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="section-card" style="border-color:var(--red);">
+  <div class="sc-header" style="border-color:var(--red);">🔴 无厕所段（200km+无任何卫生间）</div>
+  <div class="sc-body" style="font-size:0.8rem;">
+    <div>🚫 <strong>D2 橡皮山→茶卡</strong> — 1.5h车程，橡皮山只有牧民旱厕（1-2元/次，"一个坑两块板"级别）</div>
+    <div style="margin-top:4px;">🚫 <strong>D3 德令哈→察尔汗</strong> — 穿越柴达木盆地约3h，G6服务区极少且多为旱厕无水冲</div>
+    <div style="margin-top:4px;">🚫 <strong>D4 G315格尔木→U型公路→南八仙→大柴旦</strong> — 全程约350km，仅东台服务区一个厕所</div>
+    <div style="margin-top:4px;">🚫 <strong>D5 当金山→阿克塞</strong> — 翻山段，当金山南北停车区是唯一正规厕所</div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="sc-header">🧻 每天靠谱厕所清单</div>
+  <div class="sc-body" style="font-size:0.78rem;">
+    <p><strong>D1 西宁</strong> — ✅机场(干净)→✅酒店→✅莫家街</p>
+    <p><strong>D2 青海湖</strong> — ✅日月山景区→✅青海湖景区(多个好厕所)→⚠️橡皮山旱厕(巨脏)→✅茶卡盐湖景区(有冲水排队久)→✅茶卡镇</p>
+    <p><strong>D3 柴达木</strong> — ✅茶卡出发→✅乌兰服务区→⚠️德令哈服务区(旱厕)→⚠️察尔汗(环保厕所异味)→✅格尔木酒店</p>
+    <p><strong>D4 G315</strong> — ✅格尔木出发→⚠️东台服务区(唯一!)→⚠️南八仙驿站(✅推荐!雅丹区唯一正规厕所24h)→✅大柴旦酒店</p>
+    <p><strong>D5 敦煌</strong> — ✅翡翠湖(景区有)→⚠️当金山南北停车区(✅24h下山前必去)→✅阿克塞服务区→✅敦煌市区</p>
+    <p><strong>D6 敦煌</strong> — ✅莫高窟(全程最好!温水+纸巾+烘干)→✅鸣沙山(进深点用排队短)→✅市区</p>
+    <p><strong>D7 嘉峪关/丹霞</strong> — ✅嘉峪关景区→✅七彩丹霞(<strong>全程最五星!</strong>每个观景台都有热水洗手)</p>
+    <p><strong>D8 回程</strong> — ✅张掖→✅扁都口服务区→✅阿柔服务区→⚠️门源(旺季临时厕所)→✅机场</p>
+  </div>
+</div>
+
+<div class="section-card" style="border-color:var(--em);">
+  <div class="sc-header" style="border-color:var(--em);">🎒 卫生间专用装备清单</div>
+  <div class="sc-body">
+    <div style="display:flex;flex-wrap:wrap;gap:4px 8px;">
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🧻 纸巾×3大包</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🧴 免洗洗手液×2</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🧻 湿厕纸×2包（强烈推荐）</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🚻 一次性马桶垫×20</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">💧 小喷水瓶（冲厕所用）</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🩸 卫生巾/护垫足量</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">👝 女性站立小便器×10</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🛍️ 黑色垃圾袋×10</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🌂 折叠伞（荒野遮挡）</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🧤 一次性手套×1包</span>
+      <span style="background:var(--bg3);padding:3px 10px;border-radius:10px;font-size:0.78rem;">🦠 消毒喷雾（喷马桶）</span>
+    </div>
+  </div>
+</div>
+
+<div class="section-card">
+  <div class="sc-header">💡 实战经验总结</div>
+  <div class="sc-body" style="font-size:0.78rem;">
+    <div>🔴 看到加油站/服务区<strong>立刻去</strong>！不要等"下一个"，下一个可能有也可能没厕所</div>
+    <div style="margin-top:3px;">🔴 旱厕带湿厕纸：干纸擦不干净没水洗，湿厕纸是神器</div>
+    <div style="margin-top:3px;">🟡 少喝水？错！高原必须多喝水，但掌握节奏——开车前解决、下车休息点必去</div>
+    <div style="margin-top:3px;">🟡 女生随身小包：纸巾+湿厕纸+免洗洗手液+卫生巾+折叠伞，不翻行李箱</div>
+    <div style="margin-top:3px;">🟡 高原"野尿"技巧：SUV开后门+伞形成遮挡，站在上风处，离公路100m但别走远</div>
+    <div style="margin-top:3px;">🟢 张掖七彩丹霞是全程唯一五星级厕所（热水+暖风+纸巾+每个观景台都有）</div>
+    <div style="margin-top:3px;">🟢 莫高窟数字中心厕所也很好（干净+温水+烘干）</div>
+    <div style="margin-top:3px;">🟢 南八仙驿站是雅丹区唯一正规厕所，24h开放，务必停一下</div>
+  </div>
+</div>
+
+</div><!-- end prep-toilet -->
 
 </div><!-- end mod-prep -->
 
