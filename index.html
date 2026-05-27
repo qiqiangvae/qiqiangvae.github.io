@@ -181,7 +181,7 @@
   </button>
   <button class="module-btn" onclick="switchModule('prep')">
     <div>🎒 准备攻略</div>
-    <div class="sub-lbl">物品·穿搭·拍摄·饮食</div>
+    <div class="sub-lbl">备物·穿搭·摄影·美食·如厕</div>
   </button>
   <button class="module-btn" onclick="switchModule('map')">
     🗺️ 行车路线图
@@ -572,41 +572,173 @@ function switchPrepTab(tab) {
   </div>
 </div>
 
-<div class="prep-sec-h">🎒 必备物品清单</div>
+<div class="prep-sec-h">🎒 物品采购清单·一页全含</div>
 
-<div class="section-card"><div class="sc-header">📄 证件&金钱</div><div class="sc-body"><div class="item-grid">
-<div class="item-card"><div class="icn">🪪</div><div class="nm">身份证+驾驶证</div><div class="why">租车、酒店必备</div></div>
-<div class="item-card"><div class="icn">💳</div><div class="nm">信用卡+现金¥500</div><div class="why">偏远地区备现金</div></div>
-<div class="item-card"><div class="icn">📱</div><div class="nm">手机+车载快充线</div><div class="why">导航耗电快</div></div>
-<div class="item-card"><div class="icn">🔋</div><div class="nm">20000mAh充电宝</div><div class="why">长途驾驶必备</div></div>
+<div class="section-card" style="border-color:var(--red);">
+  <div class="sc-header" style="border-color:var(--red);">📋 采购须知</div>
+  <div class="sc-body" style="font-size:0.78rem;">
+    <p>下面是8天全程所需物品，分类标注<strong>采购地点</strong>和<strong>参考价格</strong>。建议出发前一周收齐，D1到西宁后补最后一批：</p>
+    <p style="margin-top:4px;">
+      <span style="background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:0.72rem;">🏠 家里带</span>
+      <span style="background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:0.72rem;margin-left:4px;">📱 提前网购</span>
+      <span style="background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:0.72rem;margin-left:4px;">💊 西宁药店买</span>
+      <span style="background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:0.72rem;margin-left:4px;">🏪 西宁超市买</span>
+      <span style="background:var(--bg3);padding:2px 8px;border-radius:4px;font-size:0.72rem;margin-left:4px;">🎒 随身带车上</span>
+    </p>
+    <p style="margin-top:6px;color:var(--fg2);">✅ = 确认已准备 &nbsp; ☐ = 还没买 &nbsp; 建议打印出来打勾</p>
+  </div>
+</div>
+
+<!-- 1. 证件&租车 -->
+<div class="section-card"><div class="sc-header">📄 证件&租车 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🪪</div><div class="nm">身份证+驾驶证</div><div class="why">租车/酒店必备，缺一不可</div></div>
+<div class="item-card"><div class="icn">💳</div><div class="nm">信用卡+现金¥500</div><div class="why">租车押金+偏远加油站收现金</div></div>
+<div class="item-card"><div class="icn">📄</div><div class="nm">租车预订确认单</div><div class="why">一嗨/神州 提前订SUV</div></div>
+<div class="item-card"><div class="icn">📱</div><div class="nm">手机+车载快充线×2</div><div class="why">导航耗电快，2根线前后排各1</div></div>
 </div></div></div>
 
-<div class="section-card"><div class="sc-header">💊 药品&健康</div><div class="sc-body"><div class="item-grid">
-<div class="item-card"><div class="icn">🧪</div><div class="nm">葡萄糖口服液</div><div class="why">高反急救最有效！¥5/支</div></div>
-<div class="item-card"><div class="icn">💊</div><div class="nm">布洛芬</div><div class="why">高反头痛特效药</div></div>
-<div class="item-card"><div class="icn">🫁</div><div class="nm">氧气瓶×2-3罐</div><div class="why">西宁药店¥20，景区¥50</div></div>
-<div class="item-card"><div class="icn">🌡️</div><div class="nm">感冒药+肠胃药</div><div class="why">温差大+饮食不适</div></div>
-<div class="item-card"><div class="icn">🤒</div><div class="nm">创可贴+晕车药</div><div class="why">盘山路多</div></div>
-<div class="item-card"><div class="icn">💧</div><div class="nm">保温杯</div><div class="why">高原多喝热水</div></div>
+<!-- 2. 衣物类 -->
+<div class="section-card" style="border-color:var(--cyan);"><div class="sc-header" style="border-color:var(--cyan);">👗 衣物 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带 · 详见穿搭tab</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">👕</div><div class="nm">短袖T恤×4-5件</div><div class="why">每天换，敦煌30°C+单穿</div></div>
+<div class="item-card"><div class="icn">👕</div><div class="nm">长袖T恤/衬衫×2件</div><div class="why">青海湖+祁连带</div></div>
+<div class="item-card"><div class="icn">👗</div><div class="nm">连衣裙×2-3条</div><div class="why">红/白/长款，盐湖+翡翠湖+鸣沙山📸</div></div>
+<div class="item-card"><div class="icn">🧥</div><div class="nm">冲锋衣（必带）</div><div class="why">防风防水，一天四季全靠它</div></div>
+<div class="item-card"><div class="icn">🧥</div><div class="nm">抓绒/薄卫衣×1</div><div class="why">中层保暖，青海湖+祁连穿</div></div>
+<div class="item-card"><div class="icn">👖</div><div class="nm">牛仔裤/工装裤×2条</div><div class="why">百搭耐脏，适合多场景</div></div>
+<div class="item-card"><div class="icn">👖</div><div class="nm">阔腿裤/休闲裤×1</div><div class="why">舒适开车+嘉峪关拍照</div></div>
+<div class="item-card"><div class="icn">🩳</div><div class="nm">短裤/短裙×1</div><div class="why">敦煌35°C穿</div></div>
+<div class="item-card"><div class="icn">👙</div><div class="nm">内衣×3-4件</div><div class="why">运动内衣×2 + 日常×1-2</div></div>
+<div class="item-card"><div class="icn">🩲</div><div class="nm">内裤×7-8条</div><div class="why">一次性5条+正常3条（买一次性最省事）</div></div>
+<div class="item-card"><div class="icn">🧦</div><div class="nm">袜子×6双</div><div class="why">含羊毛袜2双（冷的时候穿）</div></div>
+<div class="item-card"><div class="icn">🛏️</div><div class="nm">睡衣（长袖长裤）</div><div class="why">6月西北晚上10°C，短袖睡衣冷</div></div>
 </div></div></div>
 
-<div class="section-card"><div class="sc-header">🧴 防晒&护肤</div><div class="sc-body"><div class="item-grid">
-<div class="item-card"><div class="icn">🧴</div><div class="nm">防晒霜SPF50+</div><div class="why">紫外线极强！PA+++</div></div>
-<div class="item-card"><div class="icn">🕶️</div><div class="nm">墨镜</div><div class="why">盐湖反光+开车必备</div></div>
-<div class="item-card"><div class="icn">🧢</div><div class="nm">遮阳帽+防晒面巾</div><div class="why">物理防晒最有效</div></div>
-<div class="item-card"><div class="icn">💄</div><div class="nm">润唇膏+保湿霜</div><div class="why">西北极其干燥</div></div>
-<div class="item-card"><div class="icn">🧻</div><div class="nm">湿纸巾+免洗洗手液</div><div class="why">沿途旱厕没水洗🚽</div></div>
-<div class="item-card"><div class="icn">🧻</div><div class="nm">卫生纸（多带）</div><div class="why">很多厕所不提供</div></div>
+<!-- 3. 鞋履 -->
+<div class="section-card"><div class="sc-header">👟 鞋履 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🥾</div><div class="nm">运动鞋/徒步鞋</div><div class="why">穿1带1，茶卡+丹霞+翡翠湖走路多</div></div>
+<div class="item-card"><div class="icn">🩴</div><div class="nm">拖鞋</div><div class="why">茶卡下水+酒店+车内放松三用</div></div>
+<div class="item-card"><div class="icn">👡</div><div class="nm">凉鞋/洞洞鞋</div><div class="why">敦煌35°C穿+茶卡下水备选</div></div>
 </div></div></div>
 
-<div class="section-card"><div class="sc-header">🎒 户外&摄影</div><div class="sc-body"><div class="item-grid">
-<div class="item-card"><div class="icn">🚁</div><div class="nm">无人机（强烈推荐）</div><div class="why">翡翠湖+丹霞航拍绝了</div></div>
-<div class="item-card"><div class="icn">📷</div><div class="nm">相机+备用电池</div><div class="why">低温掉电快·备暖宝宝</div></div>
-<div class="item-card"><div class="icn">🩴</div><div class="nm">拖鞋/凉鞋</div><div class="why">茶卡盐湖穿</div></div>
-<div class="item-card"><div class="icn">📦</div><div class="nm">密封袋（大+小）</div><div class="why">鸣沙山防沙</div></div>
-<div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备</div></div>
-<div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋</div><div class="why">车上装杂物</div></div>
+<!-- 4. 药品&健康 -->
+<div class="section-card" style="border-color:var(--red);"><div class="sc-header" style="border-color:var(--red);">💊 药品&健康 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">💊 西宁药店买</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🧪</div><div class="nm">葡萄糖口服液×10支</div><div class="why">高反急救最有效！¥5/支，药店买</div></div>
+<div class="item-card"><div class="icn">💊</div><div class="nm">布洛芬×1盒</div><div class="why">高反头痛特效药</div></div>
+<div class="item-card"><div class="icn">🫁</div><div class="nm">氧气瓶×2-3罐</div><div class="why">西宁药店¥20/罐，景区¥50！药店买</div></div>
+<div class="item-card"><div class="icn">🌡️</div><div class="nm">感冒药+肠胃药</div><div class="why">温差大+饮食不适，各备1盒</div></div>
+<div class="item-card"><div class="icn">🤒</div><div class="nm">创可贴+晕车药</div><div class="why">盘山路多+橡皮山翻山</div></div>
+<div class="item-card"><div class="icn">🩹</div><div class="nm">红景天（提前吃）</div><div class="why">提前一周口服，药店或网购</div></div>
+<div class="item-card"><div class="icn">💧</div><div class="nm">保温杯（必带）</div><div class="why">高原多喝热水，高反时一口热水比药管用</div></div>
 </div></div></div>
+
+<!-- 5. 防晒&护肤 -->
+<div class="section-card"><div class="sc-header">🧴 防晒&护肤 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🧴</div><div class="nm">防晒霜SPF50+ PA+++</div><div class="why">紫外线极强！带2支，全身涂</div></div>
+<div class="item-card"><div class="icn">🕶️</div><div class="nm">墨镜</div><div class="why">盐湖反光+开车刺眼，必带</div></div>
+<div class="item-card"><div class="icn">🧢</div><div class="nm">大檐防晒帽/渔夫帽</div><div class="why">物理防晒最有效，比任何防晒霜都好</div></div>
+<div class="item-card"><div class="icn">😷</div><div class="nm">防晒面巾/口罩</div><div class="why">开车+戈壁防风沙，买透气款</div></div>
+<div class="item-card"><div class="icn">💪</div><div class="nm">冰袖×2对</div><div class="why">开车防晒不闷热，备一对换洗</div></div>
+<div class="item-card"><div class="icn">💄</div><div class="nm">润唇膏+保湿霜</div><div class="why">西北极其干燥，嘴唇干裂是常态</div></div>
+<div class="item-card"><div class="icn">🧴</div><div class="nm">补水面膜×5片</div><div class="why">每天一片，晒后修复+保湿</div></div>
+</div></div></div>
+
+<!-- 6. 卫生间装备 -->
+<div class="section-card" style="border-color:var(--amber);"><div class="sc-header" style="border-color:var(--amber);">🚻 卫生间装备 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带 + 超市补</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🧻</div><div class="nm">纸巾×3大包</div><div class="why">很多厕所不提供，1大包≈够2-3天</div></div>
+<div class="item-card"><div class="icn">🧻</div><div class="nm">湿厕纸×2包</div><div class="why">强烈推荐！旱厕没水洗，湿厕纸是神器</div></div>
+<div class="item-card"><div class="icn">🧴</div><div class="nm">免洗洗手液×2</div><div class="why">车上放1瓶+随身带1瓶</div></div>
+<div class="item-card"><div class="icn">🚻</div><div class="nm">一次性马桶垫×20</div><div class="why">服务区公厕必备，每天2-3个</div></div>
+<div class="item-card"><div class="icn">💧</div><div class="nm">小喷水瓶</div><div class="why">冲厕所用，空矿泉水瓶扎孔即可</div></div>
+<div class="item-card"><div class="icn">🩸</div><div class="nm">卫生巾/护垫足量</div><div class="why">高原可能提前，有备无患</div></div>
+<div class="item-card"><div class="icn">👝</div><div class="nm">女性站立小便器×10</div><div class="why">女生荒野解决神器，拼多多¥20/10个</div></div>
+<div class="item-card"><div class="icn">🛍️</div><div class="nm">黑色垃圾袋×10</div><div class="why">装脏纸巾+车内垃圾桶+防水用</div></div>
+<div class="item-card"><div class="icn">🌂</div><div class="nm">折叠伞</div><div class="why">荒野遮挡+防晒两用☀️</div></div>
+<div class="item-card"><div class="icn">🧤</div><div class="nm">一次性手套×1包</div><div class="why">清理旱厕/接触公共设施</div></div>
+<div class="item-card"><div class="icn">🦠</div><div class="nm">消毒喷雾</div><div class="why">喷马桶圈+门把手</div></div>
+</div></div></div>
+
+<!-- 7. 饮食&干粮 -->
+<div class="section-card" style="border-color:var(--em);"><div class="sc-header" style="border-color:var(--em);">🍜 饮食干粮 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏪 D1到西宁超市一次性买齐</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🍜</div><div class="nm">泡面×6-8桶</div><div class="why">沿途午餐+酒店夜宵，买合味道/康师傅</div></div>
+<div class="item-card"><div class="icn">🔥</div><div class="nm">自热米饭×4盒</div><div class="why">柴达木+G315无补给段吃，注意高原沸点低</div></div>
+<div class="item-card"><div class="icn">🍞</div><div class="nm">馕/大饼×2个</div><div class="why">耐放不坏，比面包管饱</div></div>
+<div class="item-card"><div class="icn">🥚</div><div class="nm">卤蛋/乡巴佬×10</div><div class="why">高蛋白零食，泡面伴侣</div></div>
+<div class="item-card"><div class="icn">🥩</div><div class="nm">火腿肠×1包</div><div class="why">即食，泡面/自热米饭加料</div></div>
+<div class="item-card"><div class="icn">🥒</div><div class="nm">榨菜×5包</div><div class="why">下饭神器，高原胃口差时管用</div></div>
+<div class="item-card"><div class="icn">🍫</div><div class="nm">巧克力/士力架×6</div><div class="why">能量补充，开车提神</div></div>
+<div class="item-card"><div class="icn">🥜</div><div class="nm">坚果/牛肉干</div><div class="why">长距离驾驶嚼着吃</div></div>
+<div class="item-card"><div class="icn">🍎</div><div class="nm">苹果/橘子×各4个</div><div class="why">补充维生素，防便秘（高原干燥）</div></div>
+<div class="item-card"><div class="icn">💧</div><div class="nm">矿泉水×2箱</div><div class="why">必买够！柴达木段干燥到每小时想喝水</div></div>
+<div class="item-card"><div class="icn">🥤</div><div class="nm">红牛/东鹏×6罐</div><div class="why">D3+D7最长驾驶日提神用</div></div>
+<div class="item-card"><div class="icn">☕</div><div class="nm">速溶咖啡/茶包</div><div class="why">酒店没咖啡机，早上提神用</div></div>
+<div class="item-card"><div class="icn">🍬</div><div class="nm">润喉糖/糖果</div><div class="why">开车困了含着提神+防口干</div></div>
+</div>
+<div style="margin-top:8px;font-size:0.75rem;color:var(--em);border-top:1px solid var(--border);padding-top:6px;">
+💡 大超市推荐：西宁华联超市/王府井超市，比沿途小镇便宜30-50%。自热米饭注意高原沸点低（90°C），加热反应加时1-2min。
+</div></div></div>
+
+<!-- 8. 电子设备 -->
+<div class="section-card"><div class="sc-header">📱 电子设备 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🔋</div><div class="nm">20000mAh充电宝</div><div class="why">长途驾驶必备，导航+手机耗电快</div></div>
+<div class="item-card"><div class="icn">🎵</div><div class="nm">下载歌单/播客</div><div class="why">柴达木+祁连无信号！提前下载离线音乐</div></div>
+<div class="item-card"><div class="icn">🗺️</div><div class="nm">离线地图已下载</div><div class="why">高德下载\"青海省\"+\"甘肃省\"离线包</div></div>
+<div class="item-card"><div class="icn">🪑</div><div class="nm">车载手机支架</div><div class="why">导航必备，确认和车型匹配</div></div>
+<div class="item-card"><div class="icn">🔌</div><div class="nm">点烟器车充×1</div><div class="why">租的车可能只有USB-A口，备一个不亏</div></div>
+<div class="item-card"><div class="icn">📶</div><div class="nm">在线视频缓存</div><div class="why">酒店WiFi慢，提前缓存视频当夜宵</div></div>
+</div></div></div>
+
+<!-- 9. 摄影 -->
+<div class="section-card" style="border-color:var(--purple);"><div class="sc-header" style="border-color:var(--purple);">📷 摄影装备 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🚁</div><div class="nm">无人机（强烈推荐）</div><div class="why">翡翠湖+丹霞航拍绝了！Mini系列<250g不用登记</div></div>
+<div class="item-card"><div class="icn">📷</div><div class="nm">相机+备用电池×2</div><div class="why">低温掉电快，备暖宝宝贴电池</div></div>
+<div class="item-card"><div class="icn">🛩️</div><div class="nm">无人机备用电池</div><div class="why">1块飞不到20min，至少2-3块</div></div>
+<div class="item-card"><div class="icn">📦</div><div class="nm">密封袋（大+小）</div><div class="why">鸣沙山防沙+相机镜头防灰+装湿衣服</div></div>
+<div class="item-card"><div class="icn">🧹</div><div class="nm">气吹+镜头清洁布</div><div class="why">戈壁风沙大，换镜头必用</div></div>
+<div class="item-card"><div class="icn">📱</div><div class="nm">手机广角镜头夹</div><div class="why">手机党拍盐湖大片，比相机方便</div></div>
+</div></div></div>
+
+<!-- 10. 其他零碎 -->
+<div class="section-card"><div class="sc-header">🎒 其他必备 <span style="font-size:0.7rem;font-weight:400;color:var(--fg2);">🏠 家里带+超市补</span></div><div class="sc-body"><div class="item-grid">
+<div class="item-card"><div class="icn">🔦</div><div class="nm">手电筒/手机闪光灯</div><div class="why">沙漠营地+酒店停电备用</div></div>
+<div class="item-card"><div class="icn">🧹</div><div class="nm">湿巾×2包</div><div class="why">车上擦手+擦防晒+吃完饭没水洗</div></div>
+<div class="item-card"><div class="icn">🛍️</div><div class="nm">折叠收纳袋×3</div><div class="why">车上分类装脏衣服/食物/杂物</div></div>
+<div class="item-card"><div class="icn">🧣</div><div class="nm">大围巾/披肩</div><div class="why">拍照道具+冷时裹+遮阳三用</div></div>
+<div class="item-card"><div class="icn">☂️</div><div class="nm">折叠伞</div><div class="why">防晒+挡雨+荒野遮挡三用</div></div>
+<div class="item-card"><div class="icn">🔐</div><div class="nm">行李箱密码锁</div><div class="why">酒店寄存行李时用</div></div>
+<div class="item-card"><div class="icn">🪪</div><div class="nm">学生证/教师证等</div><div class="why">部分景点有优惠（如莫高窟）</div></div>
+</div></div></div>
+
+<!-- 采购时间表 -->
+<div class="section-card" style="border-color:var(--cyan);">
+  <div class="sc-header" style="border-color:var(--cyan);">⏰ 采购时间表·什么时候买什么</div>
+  <div class="sc-body" style="font-size:0.8rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;">
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--blue);">📅 出发前1周</div>
+        <div style="margin-top:4px;">· 莫高窟A票预约 ✅</div>
+        <div>· 租车预订 ✅</div>
+        <div>· 全程住宿预订 ✅</div>
+        <div>· 网购一次性内裤+马桶垫+站立小便器</div>
+        <div>· 网购红景天开始吃</div>
+        <div>· 下载离线地图+歌单+缓存视频</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--em);">📅 出发前1天</div>
+        <div style="margin-top:4px;">· 收拾行李箱，按清单打勾</div>
+        <div>· 相机+无人机充电</div>
+        <div>· 充电宝充满</div>
+        <div>· 确认航班动态</div>
+        <div>· 查15天天气预报</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);">📅 D1到西宁后</div>
+        <div style="margin-top:4px;">· 🏪 超市买：泡面/自热米饭/水/零食/水果</div>
+        <div>· 💊 药店买：葡萄糖口服液/氧气瓶/布洛芬</div>
+        <div>· 矿泉水买够！柴达木段巨干</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <div class="prep-sec-h">📱 必备App & 小程序</div>
@@ -626,26 +758,151 @@ function switchPrepTab(tab) {
 <!-- TAB 2: 穿搭指南 -->
 <div class="prep-pane" id="prep-outfit">
 
-<div class="prep-sec-h">👗 穿搭指南</div>
+<div class="prep-sec-h">👗 穿搭指南 · 8天完整方案</div>
+
+<!-- 核心策略 -->
 <div class="section-card" style="border-color:var(--cyan);">
   <div class="sc-header" style="border-color:var(--cyan);">🧅 核心策略：洋葱叠穿法</div>
   <div class="sc-body">
-    <p style="font-size:0.85rem;">1️⃣ <strong>底层（排汗）</strong> — 短袖T恤/速干衣。敦煌30°C+时单穿</p>
-    <p style="font-size:0.85rem;margin-top:4px;">2️⃣ <strong>中层（保暖）</strong> — 抓绒衣/薄毛衣。青海湖、祁连15-20°C时加</p>
-    <p style="font-size:0.85rem;margin-top:4px;">3️⃣ <strong>外层（防风防雨）</strong> — 冲锋衣/薄羽绒。早晚5-10°C时穿</p>
-    <p style="font-size:0.78rem;color:var(--fg2);margin-top:8px;">💡 一天经历四季：敦煌30°C → 青海湖5°C。叠穿法热了脱冷了穿。</p>
+    <p style="font-size:0.82rem;">西北6月温差极大（5°C↔35°C），一天经四季：敦煌30°C车里空调→青海湖边5°C冷风。叠穿是唯一解法。</p>
+    <p style="font-size:0.85rem;margin-top:8px;">1️⃣ <strong>底层（排汗）</strong> — 短袖T恤/速干衣 × 4-5件。30°C+单穿，冷时叠</p>
+    <p style="font-size:0.85rem;margin-top:4px;">2️⃣ <strong>中层（保暖）</strong> — 抓绒衣/薄卫衣 × 1件。青海湖、祁连、早晚温差大时中间层</p>
+    <p style="font-size:0.85rem;margin-top:4px;">3️⃣ <strong>外层（防风防雨）</strong> — 冲锋衣/薄羽绒 × 1件。高原大风+阵雨，外层防风比保暖关键</p>
+    <p style="font-size:0.78rem;color:var(--fg2);margin-top:8px;">💡 一天流程示例：早上5°C穿三层 → 中午25°C脱到只剩底层 → 傍晚日落又穿回三层</p>
   </div>
 </div>
 
+<!-- 清单：带什么 -->
+<div class="section-card">
+  <div class="sc-header">🎒 衣物清单·8天要带什么（女生版）</div>
+  <div class="sc-body">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;font-size:0.8rem;">
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">👕 上衣</div>
+        <div>短袖T恤 × 4-5件（敦煌+车内穿）</div>
+        <div>长袖T恤/衬衫 × 2件（青海湖+祁连）</div>
+        <div>📸 拍照用：吊带/背心 × 2（配盐湖+沙漠）</div>
+        <div>📸 拍照用：连衣裙 × 2-3条（红/白/长款，茶卡+翡翠湖+敦煌）</div>
+        <div>卫衣/薄毛衣 × 1件（冷的时候叠穿）</div>
+        <div>防晒衫/皮肤衣 × 1件（开车必备）</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">👖 下装</div>
+        <div>牛仔裤/工装裤 × 2条（适合多场景）</div>
+        <div>阔腿裤/休闲裤 × 1条（舒适开车）</div>
+        <div>短裤/短裙 × 1条（敦煌30°C穿）</div>
+        <div>瑜伽裤/打底裤 × 1条（当秋裤+车上穿）</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">🧥 外套</div>
+        <div><strong>冲锋衣（必带！）</strong> — 防风防水，青海湖+祁连+山顶都用得上</div>
+        <div>薄羽绒/棉服（怕冷选带）— 海拔3,500m+早晚只有5°C</div>
+        <div>西装外套/牛仔外套 — 拍照出片用，配裙子好看</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">👟 鞋履</div>
+        <div><strong>徒步鞋/运动鞋</strong> — 茶卡走路大、丹霞爬山、翡翠湖踩盐路</div>
+        <div>凉鞋/洞洞鞋 — 茶卡盐湖下水+敦煌穿</div>
+        <div><strong>拖鞋</strong> — 酒店+车内放松+茶卡穿</div>
+        <div style="margin-top:4px;color:var(--em);font-size:0.75rem;">💡 运动鞋穿1双带1双，另一双放车里换着穿</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">🧦 配件</div>
+        <div>袜子 × 6双（其中羊毛袜×2，冷的时候穿）</div>
+        <div><strong>内裤 × 7-8条</strong>（一次性5条+正常3条）</div>
+        <div>内衣 × 3-4件（运动内衣×2，日常×1-2）</div>
+        <div>暖宝宝贴 × 10片（怕冷女生必备）</div>
+      </div>
+      <div style="background:var(--bg2);border-radius:8px;padding:10px;">
+        <div style="font-weight:700;color:var(--amber);margin-bottom:4px;">🧢 防晒配件</div>
+        <div><strong>大檐防晒帽/渔夫帽</strong> — 物理防晒最有效</div>
+        <div>防晒面巾/口罩 — 开车+戈壁防风沙</div>
+        <div><strong>墨镜（必带）</strong> — 盐湖反光+开车刺眼</div>
+        <div>冰袖 × 2对 — 开车时穿，防晒不闷热</div>
+        <div>薄披肩/大围巾 — 拍照道具+冷时裹+遮阳三用</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:0.75rem;color:var(--fg2);border-top:1px solid var(--border);padding-top:8px;">
+      🧳 打包技巧：带一个24-26寸行李箱放后备箱，车上常备一个随身包（短袖+冲锋衣+墨镜+防晒霜+保温杯）
+    </div>
+  </div>
+</div>
+
+<!-- 男生版速查 -->
+<div class="section-card" style="border-color:var(--blue);">
+  <div class="sc-header" style="border-color:var(--blue);">🧑 男生极简版·有这些就够了</div>
+  <div class="sc-body" style="font-size:0.8rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;">
+      <div><strong>短袖T恤</strong> × 5件（穿1天换1件）</div>
+      <div><strong>长袖速干/衬衫</strong> × 2件（青海湖+祁连带）</div>
+      <div><strong>冲锋衣</strong> × 1件（防风防水，抵所有外套）</div>
+      <div><strong>牛仔裤</strong> × 2条</div>
+      <div><strong>运动裤/工装裤</strong> × 1条</div>
+      <div><strong>运动鞋</strong> × 1双+洞洞鞋/拖鞋 × 1双</div>
+      <div><strong>鸭舌帽+墨镜</strong> — 开车必备</div>
+    </div>
+    <div style="margin-top:6px;color:var(--fg2);">💡 男生配色建议：白T/黑T + 牛仔/卡其裤 = 万能。想拍照好看备一件亮色（蓝/橙）外套</div>
+  </div>
+</div>
+
+<!-- 每日穿搭速查 -->
+<div class="prep-sec-h">📍 每日穿搭速查·分天穿什么</div>
 <div class="outfit-grid">
-  <div class="outfit-card"><div class="loc">🏙️ 西宁</div><div class="temps">白天 <span class="d">22-26°C</span> 夜晚 <span class="n">10-14°C</span></div><div class="otft">短袖+薄外套 / 连衣裙+开衫</div></div>
-  <div class="outfit-card"><div class="loc">🏞️ 青海湖</div><div class="temps">白天 <span class="d">15-20°C</span> 夜晚 <span class="n">5-10°C</span></div><div class="otft">长袖+抓绒+冲锋衣。风大，穿白色/红色长裙拍照</div></div>
-  <div class="outfit-card"><div class="loc">🪞 茶卡盐湖</div><div class="temps">白天 <span class="d">18-22°C</span> 夜晚 <span class="n">8-12°C</span></div><div class="otft"><strong>红色/橘色长裙</strong>+拖鞋，湖面白色倒影最明显</div></div>
-  <div class="outfit-card"><div class="loc">💎 翡翠湖</div><div class="temps">白天 <span class="d">20-24°C</span> 夜晚 <span class="n">8-12°C</span></div><div class="otft">白色/米色/浅蓝裙，配翡翠绿湖水</div></div>
-  <div class="outfit-card"><div class="loc">🏛️ 敦煌</div><div class="temps">白天 <span class="d">30-35°C</span> 夜晚 <span class="n">18-22°C</span></div><div class="otft">短袖+防晒衣。鸣沙山穿红色/黑色配沙漠</div></div>
-  <div class="outfit-card"><div class="loc">🌈 七彩丹霞</div><div class="temps">白天 <span class="d">28-32°C</span> 夜晚 <span class="n">16-20°C</span></div><div class="otft"><strong>白色或黑色纯色！</strong>别穿彩色会和丹霞撞色</div></div>
-  <div class="outfit-card"><div class="loc">🏔️ 祁连</div><div class="temps">白天 <span class="d">18-22°C</span> 夜晚 <span class="n">6-10°C</span></div><div class="otft">长袖+薄羽绒/冲锋衣。牛仔风/森系配雪山草原</div></div>
-  <div class="outfit-card"><div class="loc">🌸 门源</div><div class="temps">白天 <span class="d">20-25°C</span> 夜晚 <span class="n">10-14°C</span></div><div class="otft">白色长裙+草帽，油菜花田经典搭配</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--blue);"><div class="loc">D1 西宁 · 22-26°C</div><div class="temps">到达日，市区活动</div><div class="otft">T恤+薄外套 / 连衣裙+开衫。穿从家里出发那套即可</div><div class="ptip">💡 机场到酒店就8km，穿舒服点</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--em);"><div class="loc">D2 青海湖+茶卡 · 5-22°C</div><div class="temps">温差最大的⼀天！全天\"叠穿日\"</div><div class="otft"><strong>底层：</strong>拍照准备的红色/白色长裙👗<br><strong>中层：</strong>抓绒/卫衣（青海湖边冷）<br><strong>外层：</strong>冲锋衣（防风！湖边风极大）<br>📸 到茶卡脱外套+换拖鞋下水拍照</div><div class="ptip">💡 青海湖边拍照脱冲锋衣拍几张立刻穿上，风真的大</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--amber);"><div class="loc">D3 柴达木+察尔汗 · 15-28°C</div><div class="temps">全程开车最多的一天</div><div class="otft">T恤+牛仔裤（舒适开车）<br>冰袖+防晒帽（车里防晒）<br>薄外套备着，察尔汗风大</div><div class="ptip">💡 全程在车里为主，穿舒适透气最重要</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--purple);"><div class="loc">D4 U型公路+南八仙 · 18-28°C</div><div class="temps">戈壁荒漠风大</div><div class="otft"><strong>U型公路：</strong>牛仔风/工装风，配靴子或运动鞋<br><strong>南八仙：</strong>T恤+冲锋衣（风大）<br>墨镜必带！戈壁反光+灰大</div><div class="ptip">💡 戈壁配色：红/黑/牛仔蓝在黄沙背景下最出片</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--blue);"><div class="loc">D5 翡翠湖→敦煌 · 20-35°C</div><div class="temps">从20°C到35°C！脱外套的一天</div><div class="otft"><strong>早晨翡翠湖：</strong>白色/米色长裙+凉鞋（拍照）<br><strong>中午当金山：</strong>T恤+牛仔裤<br><strong>下午敦煌：</strong>短袖/吊带，35°C热到飞起<br><strong>沙漠营地：</strong>短袖+长裤（防蚊+骑骆驼磨腿）</div><div class="ptip">💡 当金山下山30°C vs 翡翠湖20°C，中间在车里换衣服</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--cyan);"><div class="loc">D6 莫高窟+鸣沙山 · 30-35°C</div><div class="temps">敦煌全天</div><div class="otft"><strong>白天莫高窟：</strong>短袖+防晒衣/冰袖+薄长裤（窟内凉）<br><strong>傍晚鸣沙山：</strong>📸 <strong>红色/黑色长裙或露背装</strong>配沙漠日落<br>带一双拖鞋，爬沙丘后倒沙子</div><div class="ptip">💡 鸣沙山17:00再出门，鞋套景区¥15租，别买贵的</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--red);"><div class="loc">D7 嘉峪关+丹霞 · 25-32°C</div><div class="temps">全程最长驾驶+拍照日</div><div class="otft"><strong>大地之子：</strong>顺路停，随便穿<br><strong>嘉峪关：</strong>古风/汉服/阔腿裤配古城墙<br><strong>七彩丹霞：</strong><strong>纯白或纯黑！</strong>绝对不要穿彩色（和丹霞撞色）<br>运动鞋（丹霞要爬楼梯，4号台最高）</div><div class="ptip">💡 丹霞18:00-20:00金色光线，白色衣服会被染成暖金色超美</div></div>
+  <div class="outfit-card" style="border-left:3px solid var(--em);"><div class="loc">D8 祁连+门源→飞 · 10-25°C</div><div class="temps">最后一天，草原+油菜花+机场</div><div class="otft"><strong>祁连草原：</strong>森系/牛仔风，长袖+薄外套（草原风大）<br><strong>门源油菜花：</strong>📸 <strong>白色长裙+草帽</strong>，经典中的经典<br>傍晚飞走，穿回出发时的衣服上飞机</div><div class="ptip">💡 上午凉10-15°C，中午25°C，叠穿法发挥到最后一天</div></div>
+</div>
+
+<!-- 配色速查 -->
+<div class="section-card">
+  <div class="sc-header">🎨 拍照配色速查·穿对颜色照片赢一半</div>
+  <div class="sc-body" style="font-size:0.8rem;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px;">
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🪞 茶卡盐湖</strong><br>🔴🟠 红/橘/橙色<br>湖面白色+蓝天→红色倒影最清晰</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">💎 翡翠湖</strong><br>⚪🩵 白/米白/浅蓝<br>湖水翡翠绿→浅色温柔对比</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🏜️ 鸣沙山/沙漠</strong><br>🔴⚫ 红/黑/白<br>黄沙背景下强烈的视觉反差</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🌈 七彩丹霞</strong><br>⚫⚪ 纯黑/纯白<br>丹霞本身就是彩色，纯色站上面最出片</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🏞️ 青海湖</strong><br>⚪🔴 白/红<br>蓝水+黄花+蓝天，红白最搭</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🏔️ 祁连草原</strong><br>🟤🟢 牛仔/森系<br>绿草原+雪山→大地色系融进去</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🌸 门源油菜花</strong><br>⚪ 纯白<br>黄色花海+蓝天→白裙+草帽=经典</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong style="color:var(--em);">🪨 黑独山/雅丹</strong><br>🔴🟠 亮色<br>灰色山体→亮色点缀跳脱出来</div>
+    </div>
+  </div>
+</div>
+
+<!-- 洗涤策略 -->
+<div class="section-card" style="border-color:var(--amber);">
+  <div class="sc-header" style="border-color:var(--amber);">🧺 8天不洗衣服实战策略</div>
+  <div class="sc-body" style="font-size:0.8rem;">
+    <p><strong>西北气候干燥，衣服穿一天完全没味道</strong>，不像南方出汗黏糊。合理规划可以8天不用洗衣服：</p>
+    <div style="margin-top:6px;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;">
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>T恤</strong> — 备4-5件，每天换，攒着带回家洗。买便宜的旧T穿完扔也行</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>牛仔裤/裤子</strong> — 2-3条轮换，西北干燥一周不脏</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>外套</strong> — 1件穿全程完全不洗</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>内裤</strong> — 一次性内裤×5天 + 正常×3天，或酒店水洗速干（西北一晚就干）</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>袜子</strong> — 6双一晚换，回酒店洗了挂车里，第二天就干</div>
+      <div style="background:var(--bg2);border-radius:8px;padding:8px;"><strong>裙子</strong> — 1-2条拍照穿，穿完挂起来通通风就行</div>
+    </div>
+    <p style="margin-top:8px;color:var(--em);">💡 敦煌住2晚，可以在敦煌洗一批衣服，第二天出发时全干。</p>
+  </div>
+</div>
+
+<!-- 高原穿搭特别提醒 -->
+<div class="section-card" style="border-color:var(--red);">
+  <div class="sc-header" style="border-color:var(--red);">⚠️ 高原穿搭特别提醒</div>
+  <div class="sc-body" style="font-size:0.78rem;">
+    <div>🔴 <strong>头发放下来保暖</strong> — 青海湖边风大到头痛，帽子+头发护住耳朵和太阳穴</div>
+    <div style="margin-top:3px;">🔴 <strong>保温杯必带</strong> — 高反+冷的时候一口热水比什么都管用，穿再多不如喝热的</div>
+    <div style="margin-top:3px;">🟡 <strong>别穿新鞋走长途</strong> — 每天几百公里+景点走路，穿磨合过的鞋子</div>
+    <div style="margin-top:3px;">🟡 <strong>骑骆驼别穿短裙</strong> — 鸣沙山骑骆驼40min，短裙不方便+晒腿</div>
+    <div style="margin-top:3px;">🟡 <strong>包里永远备一件冲锋衣</strong> — 西北天气说变就变，晴天→冰雹只要10min</div>
+    <div style="margin-top:3px;">🟢 <strong>睡衣带长袖长裤</strong> — 有些酒店没空调/暖气，6月西北晚上10°C，短袖睡衣冷</div>
+  </div>
 </div>
 
 </div><!-- end prep-outfit -->
