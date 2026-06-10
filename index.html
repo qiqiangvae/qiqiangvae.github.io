@@ -1303,6 +1303,14 @@ function setMapStatus(text, tone) {
   el.style.color = tone === 'warn' ? 'var(--amber)' : 'var(--fg2)';
 }
 
+function getAmapErrorText(item) {
+  if (!item) return '未知错误';
+  var result = item.result;
+  if (typeof result === 'string') return result;
+  if (result && (result.info || result.message)) return result.info || result.message;
+  return item.status || item.reason || '未知错误';
+}
+
 function getRouteKeys() {
   return Object.keys(ROUTE_KEYS_BY_DAY).sort().reduce(function(keys, day) {
     return keys.concat(ROUTE_KEYS_BY_DAY[day]);
@@ -1363,19 +1371,20 @@ function planAmapSegment(routeKey) {
   return new Promise(function(resolve) {
     var route = ROUTE_DATA[routeKey];
     if (!route || !route.p || route.p.length < 2) {
-      resolve({ key: routeKey, ok: false, path: [] });
+      resolve({ key: routeKey, ok: false, path: [], reason: 'ROUTE_DATA 缺少起终点' });
       return;
     }
     var start = route.p[0];
     var end = route.p[route.p.length - 1];
     var driving = new AMap.Driving({
       policy: (AMap.DrivingPolicy && AMap.DrivingPolicy.LEAST_TIME) || 0,
+      extensions: 'all',
       showTraffic: false,
       hideMarkers: true,
     });
-    driving.search(start, end, function(status, result) {
+    driving.search([start[0], start[1]], [end[0], end[1]], function(status, result) {
       if (status !== 'complete' || !result || !result.routes || !result.routes[0]) {
-        resolve({ key: routeKey, ok: false, path: route.p });
+        resolve({ key: routeKey, ok: false, path: [], status: status, result: result });
         return;
       }
       var path = [];
@@ -1383,13 +1392,28 @@ function planAmapSegment(routeKey) {
         if (step.path) {
           step.path.forEach(function(p) {
             if (Array.isArray(p)) path.push([p[0], p[1]]);
+            else if (typeof p.getLng === 'function' && typeof p.getLat === 'function') path.push([p.getLng(), p.getLat()]);
             else path.push([p.lng, p.lat]);
           });
         }
       });
-      resolve({ key: routeKey, ok: path.length > 1, path: path.length > 1 ? path : route.p });
+      resolve({ key: routeKey, ok: path.length > 1, path: path, distance: result.routes[0].distance, time: result.routes[0].time });
     });
   });
+}
+
+function planAmapSegmentsSequential(routeKeys, onProgress) {
+  var results = [];
+  var chain = Promise.resolve();
+  routeKeys.forEach(function(routeKey, idx) {
+    chain = chain.then(function() {
+      if (onProgress) onProgress(idx, routeKeys.length, routeKey);
+      return planAmapSegment(routeKey).then(function(result) {
+        results.push(result);
+      });
+    });
+  });
+  return chain.then(function() { return results; });
 }
 
 function renderAmapRouteMap() {
@@ -1414,13 +1438,20 @@ function renderAmapRouteMap() {
 
     var bounds = [];
     var routeKeys = getRouteKeys();
-    var tasks = routeKeys.map(function(routeKey) { return planAmapSegment(routeKey); });
-    return Promise.all(tasks).then(function(results) {
+    return planAmapSegmentsSequential(routeKeys, function(idx, total, routeKey) {
+      setMapStatus('高德驾车规划中 '+(idx + 1)+'/'+total+'：'+routeKey, null);
+    }).then(function(results) {
       var failed = 0;
+      var firstFailed = null;
       results.forEach(function(item) {
         var day = ROUTE_DATA[item.key] && ROUTE_DATA[item.key].d;
         var color = DAY_COLORS[day] || '#64748b';
-        if (!item.ok) failed++;
+        if (!item.ok) {
+          failed++;
+          if (!firstFailed) firstFailed = item;
+          if (window.console && console.warn) console.warn('[AMap.Driving failed]', item.key, item.status, item.result || item.reason);
+        }
+        if (!item.ok || !item.path.length) return;
         item.path.forEach(function(p) { bounds.push(p); });
         new AMap.Polyline({
           map: amapMap,
@@ -1436,9 +1467,9 @@ function renderAmapRouteMap() {
       if (bounds.length) amapMap.setFitView(null, false, [70, 70, 70, 70]);
       setLegendVisible(true);
       if (failed === routeKeys.length) {
-        setMapStatus('高德底图已加载，但 Driving 路线规划不可用；当前叠加本地预置轨迹。请确认 Key 域名白名单后再看真实公路/高速匹配路线。', 'warn');
+        setMapStatus('高德底图已加载，但 AMap.Driving 未返回路线；未绘制本地粗略折线，避免误判。首个失败：'+getAmapErrorText(firstFailed), 'warn');
       } else {
-        setMapStatus(failed ? '高德交互地图已加载，部分路段规划失败时使用本地预置轨迹兜底。' : '高德交互地图已加载 · 可拖动缩放 · 路线由 AMap.Driving 匹配公路/高速', failed ? 'warn' : null);
+        setMapStatus(failed ? '高德交互地图已加载，成功 '+(routeKeys.length - failed)+'/'+routeKeys.length+'，失败 '+failed+' 段；首个失败：'+getAmapErrorText(firstFailed) : '高德交互地图已加载 · 可拖动缩放 · 路线由 AMap.Driving 匹配公路/高速', failed ? 'warn' : null);
       }
     });
   }).catch(function(err) {
@@ -1459,7 +1490,7 @@ function renderLocalRouteMap() {
   if (!container) return;
   currentRouteMode = 'local';
   updateMapModeButtons('local');
-  setMapStatus('本地 SVG 路线图 · 不依赖高德 JS Key · 可作为域名受限时的备选', null);
+  setMapStatus('本地 SVG 粗略路线图 · 不依赖高德 JS Key · 仅作域名受限时的备选', null);
 
   try {
     if (typeof ROUTE_DATA === 'undefined') {
@@ -1521,7 +1552,7 @@ function renderLocalRouteMap() {
     }
     svg.push('</g>');
     svg.push('<g fill="#cbd5e1" font-size="13" font-weight="700">');
-    svg.push('<text x="'+(width-150)+'" y="'+(height-28)+'">高德 MCP 校验坐标</text>');
+    svg.push('<text x="'+(width-210)+'" y="'+(height-28)+'">粗略锚点路线 · 高德 MCP 校验坐标</text>');
     svg.push('</g>');
 
     Object.keys(ROUTE_KEYS_BY_DAY).sort().forEach(function(day) {
